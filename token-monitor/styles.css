@@ -308,73 +308,36 @@ button.ghost {
   font-size: 20px;
 }
 
-.week-day-grid {
+.week-rows {
   margin-top: 12px;
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.week-cell {
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 8px;
-  background: rgba(148, 163, 184, 0.06);
-}
-
-.week-cell .day {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.week-cell .total {
-  margin-top: 6px;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.week-cell .mini {
-  margin-top: 6px;
-  height: 6px;
-  border-radius: 999px;
-  overflow: hidden;
-  background: rgba(148, 163, 184, 0.2);
-  position: relative;
-}
-
-.week-cell .mini i {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  border-radius: 999px;
-}
-
-.week-cell .mini i.in {
-  background: rgba(239, 68, 68, 0.85);
-}
-
-.week-cell .mini i.out {
-  background: rgba(59, 130, 246, 0.85);
-  mix-blend-mode: screen;
-}
-
-.week-rows {
-  margin-top: 10px;
-  display: grid;
-  gap: 8px;
+  gap: 10px;
 }
 
 .week-row {
   display: grid;
-  grid-template-columns: 88px 1fr 120px 120px;
+  grid-template-columns: 112px 1fr 120px;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .week-row .day {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 13px;
+}
+
+.week-line {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.18);
+  overflow: hidden;
+}
+
+.week-line i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #3b82f6, #22c55e);
 }
 
 .week-row .num {
@@ -383,14 +346,10 @@ button.ghost {
   color: var(--muted);
 }
 
-.week-row .num.in { color: #ef4444; }
-.week-row .num.out { color: #3b82f6; }
-
 @media (max-width: 880px) {
   .split { grid-template-columns: 1fr; }
   .topbar { flex-direction: column; }
   .line-header { align-items: flex-start; }
   .week-stats { grid-template-columns: 1fr; }
-  .week-day-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .week-row { grid-template-columns: 72px 1fr 86px 86px; }
+  .week-row { grid-template-columns: 88px 1fr 100px; }
 }

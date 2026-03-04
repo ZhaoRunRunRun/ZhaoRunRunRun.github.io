@@ -31,7 +31,6 @@ const refs = {
   weekInputTotal: document.getElementById('weekInputTotal'),
   weekOutputTotal: document.getElementById('weekOutputTotal'),
   weekSumTotal: document.getElementById('weekSumTotal'),
-  weekDayGrid: document.getElementById('weekDayGrid'),
   weekRows: document.getElementById('weekRows')
 };
 
@@ -57,7 +56,7 @@ function toUnit(v) {
 
 function unitText(v) {
   const n = toUnit(v);
-  return state.unit === 'k' ? `${n.toFixed(2)} K` : `${formatNumber(n)}`;
+  return state.unit === 'k' ? n.toFixed(2) : `${formatNumber(n)}`;
 }
 
 function applyTheme() {
@@ -349,7 +348,6 @@ function renderWeekCard() {
     refs.weekInputTotal.textContent = '0';
     refs.weekOutputTotal.textContent = '0';
     refs.weekSumTotal.textContent = '0';
-    refs.weekDayGrid.innerHTML = '';
     refs.weekRows.innerHTML = '';
     return;
   }
@@ -380,23 +378,17 @@ function renderWeekCard() {
   const totalOutput = rows.reduce((n, r) => n + r.output, 0);
   const totalSum = totalInput + totalOutput;
   const maxTotal = Math.max(...rows.map((r) => r.total), 1);
+  const maxBar = 260;
 
   refs.weekRangeText.textContent = `${rows[0].day} ~ ${rows[rows.length - 1].day}`;
   refs.weekInputTotal.textContent = `${formatNumber(totalInput)} Token`;
   refs.weekOutputTotal.textContent = `${formatNumber(totalOutput)} Token`;
   refs.weekSumTotal.textContent = `${formatNumber(totalSum)} Token`;
 
-  refs.weekDayGrid.innerHTML = rows
-    .map((r) => {
-      const wIn = (r.input / maxTotal) * 100;
-      const wOut = (r.output / maxTotal) * 100;
-      return `<article class="week-cell"><div class="day">${r.day.slice(5)}</div><div class="total">${formatNumber(r.total)}</div><div class="mini"><i class="in" style="width:${wIn}%"></i><i class="out" style="width:${wOut}%"></i></div></article>`;
-    })
-    .join('');
-
   refs.weekRows.innerHTML = rows
     .map((r) => {
-      return `<div class="week-row"><span class="day">${r.day.slice(5)}</span><span class="num in">输入 ${formatNumber(r.input)}</span><span class="num out">输出 ${formatNumber(r.output)}</span><span class="num">总计 ${formatNumber(r.total)}</span></div>`;
+      const w = Math.max(2, Math.round((r.total / maxTotal) * maxBar));
+      return `<div class="week-row"><span class="day">${r.day}</span><div class="week-line"><i style="width:${w}px"></i></div><span class="num">${formatNumber(r.total)} token</span></div>`;
     })
     .join('');
 }
