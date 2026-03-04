@@ -9,7 +9,10 @@ const state = {
   quickRange: 'custom',
   unit: 'token',
   hoverIndex: -1,
-  chartPoints: []
+  chartPoints: [],
+  pageIndex: 0,
+  pageSize: 8,
+  generatedAt: ''
 };
 
 const refs = {
@@ -31,7 +34,13 @@ const refs = {
   weekInputTotal: document.getElementById('weekInputTotal'),
   weekOutputTotal: document.getElementById('weekOutputTotal'),
   weekSumTotal: document.getElementById('weekSumTotal'),
-  weekRows: document.getElementById('weekRows')
+  weekRows: document.getElementById('weekRows'),
+  weekPageRows: document.getElementById('weekPageRows'),
+  prevPageBtn: document.getElementById('prevPageBtn'),
+  nextPageBtn: document.getElementById('nextPageBtn'),
+  pageText: document.getElementById('pageText'),
+  refreshAt: document.getElementById('refreshAt'),
+  nowClock: document.getElementById('nowClock')
 };
 
 function isoDate(date) {
@@ -44,6 +53,13 @@ function parseDate(v) {
 
 function formatNumber(v) {
   return Math.round(v).toLocaleString('zh-CN');
+}
+
+function formatDateTime(iso) {
+  if (!iso) return '-';
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '-';
+  return d.toLocaleString('zh-CN', { hour12: false });
 }
 
 function unitLabel() {
@@ -349,12 +365,12 @@ function renderWeekCard() {
     refs.weekOutputTotal.textContent = '0';
     refs.weekSumTotal.textContent = '0';
     refs.weekRows.innerHTML = '';
+    refs.weekPageRows.innerHTML = '';
+    refs.pageText.textContent = '第 0/0 页';
+    refs.prevPageBtn.disabled = true;
+    refs.nextPageBtn.disabled = true;
     return;
   }
-
-  const lastTs = new Date(state.records[state.records.length - 1].timestamp);
-  const startTs = new Date(lastTs);
-  startTs.setDate(startTs.getDate() - 6);
 
   const dayMap = new Map();
   state.records.forEach((r) => {
@@ -365,32 +381,47 @@ function renderWeekCard() {
     row.output += Number(r.output || 0);
   });
 
-  const rows = [];
-  for (let i = 0; i < 7; i += 1) {
-    const d = new Date(startTs);
-    d.setDate(startTs.getDate() + i);
-    const key = isoDate(d);
-    const item = dayMap.get(key) || { input: 0, output: 0 };
-    rows.push({ day: key, input: item.input, output: item.output, total: item.input + item.output });
-  }
+  const allRows = Array.from(dayMap.entries())
+    .map(([day, item]) => ({ day, input: item.input, output: item.output, total: item.input + item.output }))
+    .sort((a, b) => a.day.localeCompare(b.day));
 
-  const totalInput = rows.reduce((n, r) => n + r.input, 0);
-  const totalOutput = rows.reduce((n, r) => n + r.output, 0);
+  const weekRows = allRows.slice(-7);
+  const totalInput = weekRows.reduce((n, r) => n + r.input, 0);
+  const totalOutput = weekRows.reduce((n, r) => n + r.output, 0);
   const totalSum = totalInput + totalOutput;
-  const maxTotal = Math.max(...rows.map((r) => r.total), 1);
+  const maxTotal = Math.max(...weekRows.map((r) => r.total), 1);
   const maxBar = 260;
 
-  refs.weekRangeText.textContent = `${rows[0].day} ~ ${rows[rows.length - 1].day}`;
+  refs.weekRangeText.textContent = `${weekRows[0].day} ~ ${weekRows[weekRows.length - 1].day}`;
   refs.weekInputTotal.textContent = `${formatNumber(totalInput)} Token`;
   refs.weekOutputTotal.textContent = `${formatNumber(totalOutput)} Token`;
   refs.weekSumTotal.textContent = `${formatNumber(totalSum)} Token`;
 
-  refs.weekRows.innerHTML = rows
+  refs.weekRows.innerHTML = weekRows
     .map((r) => {
       const w = Math.max(2, Math.round((r.total / maxTotal) * maxBar));
       return `<div class="week-row"><span class="day">${r.day}</span><div class="week-line"><i style="width:${w}px"></i></div><span class="num">${formatNumber(r.total)} token</span></div>`;
     })
     .join('');
+
+  const pageCount = Math.max(1, Math.ceil(allRows.length / state.pageSize));
+  if (state.pageIndex >= pageCount) state.pageIndex = pageCount - 1;
+  if (state.pageIndex < 0) state.pageIndex = 0;
+
+  const start = state.pageIndex * state.pageSize;
+  const pageRows = allRows.slice(start, start + state.pageSize);
+  const pageMax = Math.max(...pageRows.map((r) => r.total), 1);
+
+  refs.weekPageRows.innerHTML = pageRows
+    .map((r) => {
+      const w = Math.max(2, Math.round((r.total / pageMax) * 220));
+      return `<div class="page-row"><span class="date">${r.day}</span><div class="bar"><i style="width:${w}px"></i></div><span class="val">${formatNumber(r.total)} token</span></div>`;
+    })
+    .join('');
+
+  refs.pageText.textContent = `第 ${state.pageIndex + 1}/${pageCount} 页`;
+  refs.prevPageBtn.disabled = state.pageIndex <= 0;
+  refs.nextPageBtn.disabled = state.pageIndex >= pageCount - 1;
 }
 
 function render() {
@@ -452,8 +483,10 @@ async function loadData() {
   const response = await fetch(`${DATA_URL}?t=${Date.now()}`);
   const payload = await response.json();
   state.records = Array.isArray(payload.records) ? payload.records : [];
+  state.generatedAt = payload.generatedAt || '';
   state.records.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
   setDateOptions();
+  refs.refreshAt.textContent = formatDateTime(state.generatedAt || new Date().toISOString());
   render();
 }
 
@@ -503,6 +536,17 @@ function bindEvents() {
 
   refs.lineChart.addEventListener('mousemove', onChartHover);
   refs.lineChart.addEventListener('mouseleave', onChartLeave);
+
+  refs.prevPageBtn.addEventListener('click', () => {
+    state.pageIndex -= 1;
+    renderWeekCard();
+  });
+
+  refs.nextPageBtn.addEventListener('click', () => {
+    state.pageIndex += 1;
+    renderWeekCard();
+  });
+
   window.addEventListener('resize', () => renderLineChart(state.lineFiltered));
 }
 
@@ -511,9 +555,13 @@ async function init() {
   applyTheme();
   bindEvents();
   await loadData();
+
+  refs.nowClock.textContent = formatDateTime(new Date().toISOString());
   setInterval(() => {
     if (state.theme === 'auto') applyTheme();
+    refs.nowClock.textContent = formatDateTime(new Date().toISOString());
   }, 60000);
+
   setInterval(loadData, 60000);
 }
 

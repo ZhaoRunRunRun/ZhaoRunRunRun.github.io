@@ -25,14 +25,20 @@
       </div>
     </header>
 
+    <section class="card meta-panel">
+      <span>仓库：<a id="repoLink" href="https://github.com/ZhaoRunRunRun/ZhaoRunRunRun.github.io" target="_blank" rel="noopener">github.com/ZhaoRunRunRun/ZhaoRunRunRun.github.io</a></span>
+      <span>刷新时间：<strong id="refreshAt">-</strong></span>
+      <span>当前时间：<strong id="nowClock">-</strong></span>
+    </section>
+
     <section class="filters card">
       <label>
         开始日期
-        <select id="startDate"></select>
+        <span class="select-wrap"><select id="startDate"></select></span>
       </label>
       <label>
         结束日期
-        <select id="endDate"></select>
+        <span class="select-wrap"><select id="endDate"></select></span>
       </label>
       <button id="applyBtn" type="button">应用筛选</button>
       <button id="resetBtn" type="button" class="ghost">重置</button>
@@ -100,6 +106,16 @@
         </article>
       </div>
       <div id="weekRows" class="week-rows"></div>
+
+      <div class="week-pager-panel">
+        <h3>历史日统计</h3>
+        <div id="weekPageRows" class="week-page-rows"></div>
+        <div class="pager-actions">
+          <button id="prevPageBtn" type="button" class="ghost">上一页</button>
+          <span id="pageText" class="legend">第 1 页</span>
+          <button id="nextPageBtn" type="button" class="ghost">下一页</button>
+        </div>
+      </div>
     </section>
   </main>
 
