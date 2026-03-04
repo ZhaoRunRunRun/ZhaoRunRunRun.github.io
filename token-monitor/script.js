@@ -20,6 +20,12 @@ const refs = {
   outputHeatmap: document.getElementById('outputHeatmap'),
   startDate: document.getElementById('startDate'),
   endDate: document.getElementById('endDate'),
+  startDateBtn: document.getElementById('startDateBtn'),
+  endDateBtn: document.getElementById('endDateBtn'),
+  startDateMenu: document.getElementById('startDateMenu'),
+  endDateMenu: document.getElementById('endDateMenu'),
+  startDateWrap: document.getElementById('startDateWrap'),
+  endDateWrap: document.getElementById('endDateWrap'),
   applyBtn: document.getElementById('applyBtn'),
   resetBtn: document.getElementById('resetBtn'),
   statusText: document.getElementById('statusText'),
@@ -30,6 +36,7 @@ const refs = {
   darkTheme: document.getElementById('darkTheme'),
   quickRangeGroup: document.getElementById('quickRangeGroup'),
   unitGroup: document.getElementById('unitGroup'),
+  weekUnitGroup: document.getElementById('weekUnitGroup'),
   weekRangeText: document.getElementById('weekRangeText'),
   weekInputTotal: document.getElementById('weekInputTotal'),
   weekOutputTotal: document.getElementById('weekOutputTotal'),
@@ -152,23 +159,45 @@ function renderHeatmap(container, dailyValues, type) {
   });
 }
 
+function setDateButtonLabel(target) {
+  if (target === 'start') {
+    refs.startDateBtn.textContent = refs.startDate.value || '全部';
+    return;
+  }
+  refs.endDateBtn.textContent = refs.endDate.value || '全部';
+}
+
+function buildDateMenu(menuEl, type, days) {
+  const items = ['<button type="button" class="date-dd-item" data-value="">全部</button>']
+    .concat(days.map((d) => `<button type="button" class="date-dd-item" data-value="${d}">${d}</button>`))
+    .join('');
+  menuEl.innerHTML = items;
+
+  menuEl.querySelectorAll('.date-dd-item').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (type === 'start') refs.startDate.value = btn.dataset.value;
+      else refs.endDate.value = btn.dataset.value;
+      setDateButtonLabel(type);
+      menuEl.hidden = true;
+    });
+  });
+}
+
 function setDateOptions() {
   const days = Array.from(new Set(state.records.map((r) => r.timestamp.slice(0, 10))));
   const startValue = refs.startDate.value;
   const endValue = refs.endDate.value;
-
-  const options = ['<option value="">全部</option>']
-    .concat(days.map((d) => `<option value="${d}">${d}</option>`))
-    .join('');
-
-  refs.startDate.innerHTML = options;
-  refs.endDate.innerHTML = options;
 
   const min = days[0] || '';
   const max = days[days.length - 1] || '';
 
   refs.startDate.value = days.includes(startValue) ? startValue : min;
   refs.endDate.value = days.includes(endValue) ? endValue : max;
+
+  buildDateMenu(refs.startDateMenu, 'start', days);
+  buildDateMenu(refs.endDateMenu, 'end', days);
+  setDateButtonLabel('start');
+  setDateButtonLabel('end');
 }
 
 function calcLineRecords() {
@@ -356,6 +385,9 @@ function setActiveButtons() {
   refs.unitGroup.querySelectorAll('.range-btn').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.unit === state.unit);
   });
+  refs.weekUnitGroup.querySelectorAll('.range-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.unit === state.unit);
+  });
 }
 
 function renderWeekCard() {
@@ -526,12 +558,29 @@ function bindEvents() {
     render();
   });
 
-  refs.unitGroup.addEventListener('click', (e) => {
+  const onUnitClick = (e) => {
     const target = e.target.closest('.range-btn');
     if (!target) return;
     state.unit = target.dataset.unit;
-    renderLineChart(state.lineFiltered);
-    setActiveButtons();
+    render();
+  };
+
+  refs.unitGroup.addEventListener('click', onUnitClick);
+  refs.weekUnitGroup.addEventListener('click', onUnitClick);
+
+  refs.startDateBtn.addEventListener('click', () => {
+    refs.endDateMenu.hidden = true;
+    refs.startDateMenu.hidden = !refs.startDateMenu.hidden;
+  });
+
+  refs.endDateBtn.addEventListener('click', () => {
+    refs.startDateMenu.hidden = true;
+    refs.endDateMenu.hidden = !refs.endDateMenu.hidden;
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!refs.startDateWrap.contains(e.target)) refs.startDateMenu.hidden = true;
+    if (!refs.endDateWrap.contains(e.target)) refs.endDateMenu.hidden = true;
   });
 
   refs.lineChart.addEventListener('mousemove', onChartHover);

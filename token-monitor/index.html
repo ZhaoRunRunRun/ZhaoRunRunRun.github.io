@@ -39,11 +39,19 @@
     <section class="filters card">
       <label>
         开始日期
-        <span class="select-wrap"><select id="startDate"></select></span>
+        <div class="date-dd" id="startDateWrap">
+          <button id="startDateBtn" type="button" class="date-dd-btn">全部</button>
+          <div id="startDateMenu" class="date-dd-menu" hidden></div>
+          <input id="startDate" type="hidden" value="" />
+        </div>
       </label>
       <label>
         结束日期
-        <span class="select-wrap"><select id="endDate"></select></span>
+        <div class="date-dd" id="endDateWrap">
+          <button id="endDateBtn" type="button" class="date-dd-btn">全部</button>
+          <div id="endDateMenu" class="date-dd-menu" hidden></div>
+          <input id="endDate" type="hidden" value="" />
+        </div>
       </label>
       <button id="applyBtn" type="button">应用筛选</button>
       <button id="resetBtn" type="button" class="ghost">重置</button>
@@ -94,7 +102,13 @@
     <section class="card week-panel">
       <div class="week-header">
         <h2>近一周数据消耗</h2>
-        <span id="weekRangeText" class="legend"></span>
+        <div class="week-head-right">
+          <div class="range-group" id="weekUnitGroup" role="group" aria-label="近一周单位选择">
+            <button type="button" class="range-btn" data-unit="token">Token</button>
+            <button type="button" class="range-btn" data-unit="k">K Token</button>
+          </div>
+          <span id="weekRangeText" class="legend"></span>
+        </div>
       </div>
       <div class="week-stats">
         <article class="week-stat in">
