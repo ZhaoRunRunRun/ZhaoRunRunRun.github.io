@@ -82,15 +82,24 @@
 
     <section class="card week-panel">
       <div class="week-header">
-        <h2>近一周消耗概览</h2>
+        <h2>近一周数据消耗</h2>
         <span id="weekRangeText" class="legend"></span>
       </div>
-      <div class="week-kpis">
-        <div class="kpi"><span>输入总量</span><strong id="weekInputTotal">0</strong></div>
-        <div class="kpi"><span>输出总量</span><strong id="weekOutputTotal">0</strong></div>
-        <div class="kpi"><span>日均总量</span><strong id="weekDailyAvg">0</strong></div>
-        <div class="kpi"><span>峰值日期</span><strong id="weekPeakDay">-</strong></div>
+      <div class="week-stats">
+        <article class="week-stat in">
+          <span>输入总量</span>
+          <strong id="weekInputTotal">0</strong>
+        </article>
+        <article class="week-stat out">
+          <span>输出总量</span>
+          <strong id="weekOutputTotal">0</strong>
+        </article>
+        <article class="week-stat sum">
+          <span>近7日总量</span>
+          <strong id="weekSumTotal">0</strong>
+        </article>
       </div>
+      <div id="weekDayGrid" class="week-day-grid"></div>
       <div id="weekRows" class="week-rows"></div>
     </section>
   </main>

@@ -30,8 +30,8 @@ const refs = {
   weekRangeText: document.getElementById('weekRangeText'),
   weekInputTotal: document.getElementById('weekInputTotal'),
   weekOutputTotal: document.getElementById('weekOutputTotal'),
-  weekDailyAvg: document.getElementById('weekDailyAvg'),
-  weekPeakDay: document.getElementById('weekPeakDay'),
+  weekSumTotal: document.getElementById('weekSumTotal'),
+  weekDayGrid: document.getElementById('weekDayGrid'),
   weekRows: document.getElementById('weekRows')
 };
 
@@ -348,8 +348,8 @@ function renderWeekCard() {
     refs.weekRangeText.textContent = '暂无数据';
     refs.weekInputTotal.textContent = '0';
     refs.weekOutputTotal.textContent = '0';
-    refs.weekDailyAvg.textContent = '0';
-    refs.weekPeakDay.textContent = '-';
+    refs.weekSumTotal.textContent = '0';
+    refs.weekDayGrid.innerHTML = '';
     refs.weekRows.innerHTML = '';
     return;
   }
@@ -378,20 +378,25 @@ function renderWeekCard() {
 
   const totalInput = rows.reduce((n, r) => n + r.input, 0);
   const totalOutput = rows.reduce((n, r) => n + r.output, 0);
+  const totalSum = totalInput + totalOutput;
   const maxTotal = Math.max(...rows.map((r) => r.total), 1);
-  const peak = rows.reduce((a, b) => (b.total > a.total ? b : a), rows[0]);
 
   refs.weekRangeText.textContent = `${rows[0].day} ~ ${rows[rows.length - 1].day}`;
   refs.weekInputTotal.textContent = `${formatNumber(totalInput)} Token`;
   refs.weekOutputTotal.textContent = `${formatNumber(totalOutput)} Token`;
-  refs.weekDailyAvg.textContent = `${formatNumber((totalInput + totalOutput) / 7)} Token`;
-  refs.weekPeakDay.textContent = `${peak.day.slice(5)} (${formatNumber(peak.total)})`;
+  refs.weekSumTotal.textContent = `${formatNumber(totalSum)} Token`;
+
+  refs.weekDayGrid.innerHTML = rows
+    .map((r) => {
+      const wIn = (r.input / maxTotal) * 100;
+      const wOut = (r.output / maxTotal) * 100;
+      return `<article class="week-cell"><div class="day">${r.day.slice(5)}</div><div class="total">${formatNumber(r.total)}</div><div class="mini"><i class="in" style="width:${wIn}%"></i><i class="out" style="width:${wOut}%"></i></div></article>`;
+    })
+    .join('');
 
   refs.weekRows.innerHTML = rows
     .map((r) => {
-      const wIn = Math.max(2, (r.input / maxTotal) * 100);
-      const wOut = Math.max(2, (r.output / maxTotal) * 100);
-      return `<div class="week-row"><span class="day">${r.day.slice(5)}</span><div class="week-bar"><i class="in" style="width:${wIn}%"></i><i class="out" style="width:${wOut}%"></i></div><span class="num">${formatNumber(r.total)}</span></div>`;
+      return `<div class="week-row"><span class="day">${r.day.slice(5)}</span><span class="num in">输入 ${formatNumber(r.input)}</span><span class="num out">输出 ${formatNumber(r.output)}</span><span class="num">总计 ${formatNumber(r.total)}</span></div>`;
     })
     .join('');
 }
