@@ -80,6 +80,7 @@ h1 { font-size: 28px; }
 }
 
 input[type="date"],
+select,
 button {
   border-radius: 12px;
   border: 1px solid var(--border);
@@ -87,6 +88,12 @@ button {
   color: var(--text);
   padding: 8px 12px;
   font-size: 14px;
+}
+
+input[type="date"],
+select {
+  font-family: "Nunito", "Avenir Next", "PingFang SC", "Hiragino Sans GB", sans-serif;
+  font-weight: 600;
 }
 
 button {
@@ -102,6 +109,53 @@ button.ghost {
 }
 
 #statusText { color: var(--muted); font-size: 13px; }
+
+.line-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.line-tools {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.range-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.range-btn {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 10px;
+}
+
+.range-btn.active {
+  background: #16a34a;
+  border-color: #16a34a;
+  color: #ffffff;
+}
+
+.unit-select-wrap {
+  display: inline-grid;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.unit-select-wrap select {
+  border-radius: 999px;
+  padding-right: 24px;
+}
 
 .theme-controls {
   display: flex;
@@ -175,4 +229,5 @@ button.ghost {
 @media (max-width: 880px) {
   .split { grid-template-columns: 1fr; }
   .topbar { flex-direction: column; }
+  .line-header { align-items: flex-start; }
 }

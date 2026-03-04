@@ -55,8 +55,28 @@
     </section>
 
     <section class="card line-panel">
-      <h2>实时消耗趋势</h2>
+      <div class="line-header">
+        <h2>实时消耗趋势</h2>
+        <div class="line-tools">
+          <div class="range-group" id="quickRangeGroup" role="group" aria-label="快捷时间范围">
+            <button type="button" class="range-btn" data-range="custom">按全局日期</button>
+            <button type="button" class="range-btn" data-range="1h">1h</button>
+            <button type="button" class="range-btn" data-range="24h">24h</button>
+            <button type="button" class="range-btn" data-range="7d">7day</button>
+            <button type="button" class="range-btn" data-range="30d">30day</button>
+            <button type="button" class="range-btn" data-range="all">全部</button>
+          </div>
+          <label class="unit-select-wrap">
+            单位
+            <select id="unitSelect">
+              <option value="token">Token</option>
+              <option value="k">K Token</option>
+            </select>
+          </label>
+        </div>
+      </div>
       <canvas id="lineChart" width="1400" height="420" aria-label="Token trend chart"></canvas>
+      <p id="lineMeta" class="legend"></p>
       <p class="legend"><span class="dot red"></span>输入（红）<span class="dot blue"></span>输出（蓝）</p>
     </section>
   </main>

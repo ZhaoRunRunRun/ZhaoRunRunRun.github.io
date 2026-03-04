@@ -4,9 +4,12 @@ const THEME_KEY = 'token-monitor-theme';
 const state = {
   records: [],
   filtered: [],
+  lineFiltered: [],
   start: '',
   end: '',
-  theme: 'auto'
+  theme: 'auto',
+  quickRange: 'custom',
+  unit: 'token'
 };
 
 const refs = {
@@ -18,8 +21,11 @@ const refs = {
   resetBtn: document.getElementById('resetBtn'),
   statusText: document.getElementById('statusText'),
   lineChart: document.getElementById('lineChart'),
+  lineMeta: document.getElementById('lineMeta'),
   autoTheme: document.getElementById('autoTheme'),
-  darkTheme: document.getElementById('darkTheme')
+  darkTheme: document.getElementById('darkTheme'),
+  quickRangeGroup: document.getElementById('quickRangeGroup'),
+  unitSelect: document.getElementById('unitSelect')
 };
 
 function isoDate(date) {
@@ -28,6 +34,18 @@ function isoDate(date) {
 
 function parseDate(v) {
   return new Date(`${v}T00:00:00`);
+}
+
+function formatNumber(v) {
+  return Math.round(v).toLocaleString('zh-CN');
+}
+
+function unitLabel() {
+  return state.unit === 'k' ? 'K Token' : 'Token';
+}
+
+function unitValue(v) {
+  return state.unit === 'k' ? v / 1000 : v;
 }
 
 function applyTheme() {
@@ -107,18 +125,55 @@ function renderHeatmap(container, dailyValues, type) {
   });
 }
 
+function calcLineRecords() {
+  if (state.quickRange === 'custom') return state.filtered;
+  if (state.quickRange === 'all') return state.records;
+  if (!state.records.length) return [];
+
+  const nowTs = new Date(state.records[state.records.length - 1].timestamp).getTime();
+  const windows = {
+    '1h': 3600 * 1000,
+    '24h': 24 * 3600 * 1000,
+    '7d': 7 * 24 * 3600 * 1000,
+    '30d': 30 * 24 * 3600 * 1000
+  };
+  const span = windows[state.quickRange] || windows['24h'];
+  const cutoff = nowTs - span;
+  return state.records.filter((r) => new Date(r.timestamp).getTime() >= cutoff);
+}
+
+function drawAxisLabels(ctx, dpr, w, h, pad, maxYValue, firstTs, lastTs) {
+  const textColor = getComputedStyle(document.documentElement).getPropertyValue('--muted').trim() || '#94a3b8';
+  ctx.fillStyle = textColor;
+  ctx.font = `${11 * dpr}px sans-serif`;
+
+  for (let i = 0; i <= 4; i += 1) {
+    const val = unitValue((maxYValue * (4 - i)) / 4);
+    const y = pad + ((h - pad * 2) * i) / 4 + 4 * dpr;
+    ctx.fillText(`${val.toFixed(state.unit === 'k' ? 1 : 0)} ${unitLabel()}`, 8 * dpr, y);
+  }
+
+  if (firstTs && lastTs) {
+    const left = firstTs.slice(5, 16).replace('T', ' ');
+    const right = lastTs.slice(5, 16).replace('T', ' ');
+    ctx.fillText(left, pad, h - 10 * dpr);
+    const textWidth = ctx.measureText(right).width;
+    ctx.fillText(right, w - pad - textWidth, h - 10 * dpr);
+  }
+}
+
 function renderLineChart(records) {
   const canvas = refs.lineChart;
   const ctx = canvas.getContext('2d');
   const dpr = window.devicePixelRatio || 1;
   const cssWidth = canvas.clientWidth;
-  const cssHeight = Math.round(cssWidth * 0.3);
+  const cssHeight = Math.round(cssWidth * 0.32);
   canvas.width = Math.max(600, Math.round(cssWidth * dpr));
-  canvas.height = Math.max(280, Math.round(cssHeight * dpr));
+  canvas.height = Math.max(300, Math.round(cssHeight * dpr));
 
   const w = canvas.width;
   const h = canvas.height;
-  const pad = 46 * dpr;
+  const pad = 62 * dpr;
   const innerW = w - pad * 2;
   const innerH = h - pad * 2;
 
@@ -134,12 +189,22 @@ function renderLineChart(records) {
     ctx.stroke();
   }
 
-  if (records.length < 2) return;
+  if (!records.length) {
+    refs.lineMeta.textContent = '当前范围暂无数据';
+    return;
+  }
 
-  const maxY = Math.max(
+  const maxRaw = Math.max(
     ...records.map((r) => Math.max(Number(r.input || 0), Number(r.output || 0))),
     1
   );
+
+  drawAxisLabels(ctx, dpr, w, h, pad, maxRaw, records[0].timestamp, records[records.length - 1].timestamp);
+
+  if (records.length < 2) {
+    refs.lineMeta.textContent = `范围 ${records[0].timestamp.slice(0, 16)} | 单位 ${unitLabel()} | 仅 1 条记录`;
+    return;
+  }
 
   function drawLine(color, key) {
     ctx.strokeStyle = color;
@@ -147,7 +212,7 @@ function renderLineChart(records) {
     ctx.beginPath();
     records.forEach((r, i) => {
       const x = pad + (innerW * i) / (records.length - 1);
-      const y = pad + innerH - (Number(r[key] || 0) / maxY) * innerH;
+      const y = pad + innerH - (Number(r[key] || 0) / maxRaw) * innerH;
       if (i === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     });
@@ -156,6 +221,10 @@ function renderLineChart(records) {
 
   drawLine(getComputedStyle(document.documentElement).getPropertyValue('--input-line').trim(), 'input');
   drawLine(getComputedStyle(document.documentElement).getPropertyValue('--output-line').trim(), 'output');
+
+  const totalInput = records.reduce((n, r) => n + Number(r.input || 0), 0);
+  const totalOutput = records.reduce((n, r) => n + Number(r.output || 0), 0);
+  refs.lineMeta.textContent = `范围 ${records[0].timestamp.slice(0, 16)} ~ ${records[records.length - 1].timestamp.slice(0, 16)} | 单位 ${unitLabel()} | 输入 ${state.unit === 'k' ? (totalInput / 1000).toFixed(1) : formatNumber(totalInput)} | 输出 ${state.unit === 'k' ? (totalOutput / 1000).toFixed(1) : formatNumber(totalOutput)}`;
 }
 
 function filterRecords() {
@@ -169,6 +238,13 @@ function filterRecords() {
     if (end && day > end) return false;
     return true;
   });
+  state.lineFiltered = calcLineRecords();
+}
+
+function setActiveRangeBtn() {
+  refs.quickRangeGroup.querySelectorAll('.range-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.range === state.quickRange);
+  });
 }
 
 function render() {
@@ -176,11 +252,12 @@ function render() {
   const daily = dailyMap(state.filtered);
   renderHeatmap(refs.inputHeatmap, daily, 'input');
   renderHeatmap(refs.outputHeatmap, daily, 'output');
-  renderLineChart(state.filtered);
+  setActiveRangeBtn();
+  renderLineChart(state.lineFiltered);
 
   const totalInput = state.filtered.reduce((n, r) => n + Number(r.input || 0), 0);
   const totalOutput = state.filtered.reduce((n, r) => n + Number(r.output || 0), 0);
-  refs.statusText.textContent = `记录 ${state.filtered.length} 条 | 输入 ${Math.round(totalInput)} | 输出 ${Math.round(totalOutput)}`;
+  refs.statusText.textContent = `记录 ${state.filtered.length} 条 | 输入 ${formatNumber(totalInput)} Token | 输出 ${formatNumber(totalOutput)} Token`;
 }
 
 async function loadData() {
@@ -204,10 +281,15 @@ async function loadData() {
 }
 
 function bindEvents() {
-  refs.applyBtn.addEventListener('click', render);
+  refs.applyBtn.addEventListener('click', () => {
+    state.quickRange = 'custom';
+    render();
+  });
+
   refs.resetBtn.addEventListener('click', () => {
     refs.startDate.value = '';
     refs.endDate.value = '';
+    state.quickRange = 'custom';
     render();
   });
 
@@ -224,7 +306,19 @@ function bindEvents() {
     setTheme(e.target.checked ? 'dark' : 'light');
   });
 
-  window.addEventListener('resize', () => renderLineChart(state.filtered));
+  refs.quickRangeGroup.addEventListener('click', (e) => {
+    const target = e.target.closest('.range-btn');
+    if (!target) return;
+    state.quickRange = target.dataset.range;
+    render();
+  });
+
+  refs.unitSelect.addEventListener('change', (e) => {
+    state.unit = e.target.value;
+    renderLineChart(state.lineFiltered);
+  });
+
+  window.addEventListener('resize', () => renderLineChart(state.lineFiltered));
 }
 
 async function init() {
