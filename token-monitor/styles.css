@@ -124,9 +124,17 @@ button.ghost {
   font-size: 13px;
 }
 
-.meta-panel a {
-  color: #2563eb;
+.repo-icon-link {
+  display: inline-flex;
+  vertical-align: middle;
+  color: var(--text);
   text-decoration: none;
+}
+
+.repo-icon-link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
 }
 
 .select-wrap {
@@ -420,6 +428,10 @@ button.ghost {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+#pageText {
+  font-size: 14px;
 }
 
 @media (max-width: 880px) {

@@ -393,14 +393,14 @@ function renderWeekCard() {
   const maxBar = 260;
 
   refs.weekRangeText.textContent = `${weekRows[0].day} ~ ${weekRows[weekRows.length - 1].day}`;
-  refs.weekInputTotal.textContent = `${formatNumber(totalInput)} Token`;
-  refs.weekOutputTotal.textContent = `${formatNumber(totalOutput)} Token`;
-  refs.weekSumTotal.textContent = `${formatNumber(totalSum)} Token`;
+  refs.weekInputTotal.textContent = `${unitText(totalInput)} ${unitLabel()}`;
+  refs.weekOutputTotal.textContent = `${unitText(totalOutput)} ${unitLabel()}`;
+  refs.weekSumTotal.textContent = `${unitText(totalSum)} ${unitLabel()}`;
 
   refs.weekRows.innerHTML = weekRows
     .map((r) => {
       const w = Math.max(2, Math.round((r.total / maxTotal) * maxBar));
-      return `<div class="week-row"><span class="day">${r.day}</span><div class="week-line"><i style="width:${w}px"></i></div><span class="num">${formatNumber(r.total)} token</span></div>`;
+      return `<div class="week-row"><span class="day">${r.day}</span><div class="week-line"><i style="width:${w}px"></i></div><span class="num">${unitText(r.total)} ${unitLabel()}</span></div>`;
     })
     .join('');
 
@@ -415,7 +415,7 @@ function renderWeekCard() {
   refs.weekPageRows.innerHTML = pageRows
     .map((r) => {
       const w = Math.max(2, Math.round((r.total / pageMax) * 220));
-      return `<div class="page-row"><span class="date">${r.day}</span><div class="bar"><i style="width:${w}px"></i></div><span class="val">${formatNumber(r.total)} token</span></div>`;
+      return `<div class="page-row"><span class="date">${r.day}</span><div class="bar"><i style="width:${w}px"></i></div><span class="val">${unitText(r.total)} ${unitLabel()}</span></div>`;
     })
     .join('');
 
