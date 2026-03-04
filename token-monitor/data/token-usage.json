@@ -1,0 +1,35 @@
+{
+  "generatedAt": "2026-03-04T08:48:30.322798+00:00",
+  "records": [
+    {
+      "timestamp": "2026-03-03T13:03:15.177Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-04T00:05:24.427Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-04T07:51:59.100Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-04T08:03:49.127Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-04T08:04:09.559Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    }
+  ]
+}
