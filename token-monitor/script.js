@@ -201,15 +201,32 @@ function drawAxisLabels(ctx, dpr, w, h, pad, maxYValue, firstTs, lastTs) {
 
 function smoothLine(ctx, points) {
   if (!points.length) return;
+  if (points.length === 1) {
+    ctx.beginPath();
+    ctx.moveTo(points[0].x, points[0].y);
+    ctx.lineTo(points[0].x, points[0].y);
+    ctx.stroke();
+    return;
+  }
+
+  // Catmull-Rom to Bezier: smooth and guaranteed to pass every data point.
   ctx.beginPath();
   ctx.moveTo(points[0].x, points[0].y);
-  for (let i = 1; i < points.length - 1; i += 1) {
-    const xc = (points[i].x + points[i + 1].x) / 2;
-    const yc = (points[i].y + points[i + 1].y) / 2;
-    ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+
+  for (let i = 0; i < points.length - 1; i += 1) {
+    const p0 = points[Math.max(0, i - 1)];
+    const p1 = points[i];
+    const p2 = points[i + 1];
+    const p3 = points[Math.min(points.length - 1, i + 2)];
+
+    const cp1x = p1.x + (p2.x - p0.x) / 6;
+    const cp1y = p1.y + (p2.y - p0.y) / 6;
+    const cp2x = p2.x - (p3.x - p1.x) / 6;
+    const cp2y = p2.y - (p3.y - p1.y) / 6;
+
+    ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
   }
-  const last = points[points.length - 1];
-  ctx.lineTo(last.x, last.y);
+
   ctx.stroke();
 }
 
@@ -366,12 +383,7 @@ function onChartHover(event) {
   state.hoverIndex = nearest;
   const point = state.chartPoints[nearest];
   refs.chartTooltip.hidden = false;
-  refs.chartTooltip.innerHTML = [
-    `<strong>${point.record.timestamp.slice(0, 19).replace('T', ' ')}</strong>`,
-    `输入: ${unitText(Number(point.record.input || 0))} ${unitLabel()}`,
-    `输出: ${unitText(Number(point.record.output || 0))} ${unitLabel()}`,
-    `总计: ${unitText(Number(point.record.total || 0))} ${unitLabel()}`
-  ].join('<br/>');
+  refs.chartTooltip.innerHTML = `${point.record.timestamp.slice(0, 19).replace('T', ' ')} | 输入 ${unitText(Number(point.record.input || 0))} ${unitLabel()} | 输出 ${unitText(Number(point.record.output || 0))} ${unitLabel()}`;
 
   refs.chartTooltip.style.left = `${event.clientX - rect.left}px`;
   refs.chartTooltip.style.top = `${event.clientY - rect.top - 12}px`;
