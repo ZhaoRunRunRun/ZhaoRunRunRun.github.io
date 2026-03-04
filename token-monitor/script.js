@@ -26,7 +26,13 @@ const refs = {
   autoTheme: document.getElementById('autoTheme'),
   darkTheme: document.getElementById('darkTheme'),
   quickRangeGroup: document.getElementById('quickRangeGroup'),
-  unitGroup: document.getElementById('unitGroup')
+  unitGroup: document.getElementById('unitGroup'),
+  weekRangeText: document.getElementById('weekRangeText'),
+  weekInputTotal: document.getElementById('weekInputTotal'),
+  weekOutputTotal: document.getElementById('weekOutputTotal'),
+  weekDailyAvg: document.getElementById('weekDailyAvg'),
+  weekPeakDay: document.getElementById('weekPeakDay'),
+  weekRows: document.getElementById('weekRows')
 };
 
 function isoDate(date) {
@@ -248,7 +254,7 @@ function renderLineChart(records) {
   ctx.clearRect(0, 0, w, h);
   drawGrid(ctx, w, h, pad, innerH);
 
-  refs.chartTooltip.hidden = true;
+  if (state.hoverIndex < 0) refs.chartTooltip.hidden = true;
   state.chartPoints = [];
 
   if (!records.length) {
@@ -299,12 +305,6 @@ function renderLineChart(records) {
 
   if (state.hoverIndex >= 0 && state.hoverIndex < state.chartPoints.length) {
     const hp = state.chartPoints[state.hoverIndex];
-    ctx.strokeStyle = 'rgba(148, 163, 184, 0.55)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(hp.x, pad);
-    ctx.lineTo(hp.x, h - pad);
-    ctx.stroke();
 
     ctx.beginPath();
     ctx.fillStyle = inputColor;
@@ -343,6 +343,59 @@ function setActiveButtons() {
   });
 }
 
+function renderWeekCard() {
+  if (!state.records.length) {
+    refs.weekRangeText.textContent = '暂无数据';
+    refs.weekInputTotal.textContent = '0';
+    refs.weekOutputTotal.textContent = '0';
+    refs.weekDailyAvg.textContent = '0';
+    refs.weekPeakDay.textContent = '-';
+    refs.weekRows.innerHTML = '';
+    return;
+  }
+
+  const lastTs = new Date(state.records[state.records.length - 1].timestamp);
+  const startTs = new Date(lastTs);
+  startTs.setDate(startTs.getDate() - 6);
+
+  const dayMap = new Map();
+  state.records.forEach((r) => {
+    const d = r.timestamp.slice(0, 10);
+    if (!dayMap.has(d)) dayMap.set(d, { input: 0, output: 0 });
+    const row = dayMap.get(d);
+    row.input += Number(r.input || 0);
+    row.output += Number(r.output || 0);
+  });
+
+  const rows = [];
+  for (let i = 0; i < 7; i += 1) {
+    const d = new Date(startTs);
+    d.setDate(startTs.getDate() + i);
+    const key = isoDate(d);
+    const item = dayMap.get(key) || { input: 0, output: 0 };
+    rows.push({ day: key, input: item.input, output: item.output, total: item.input + item.output });
+  }
+
+  const totalInput = rows.reduce((n, r) => n + r.input, 0);
+  const totalOutput = rows.reduce((n, r) => n + r.output, 0);
+  const maxTotal = Math.max(...rows.map((r) => r.total), 1);
+  const peak = rows.reduce((a, b) => (b.total > a.total ? b : a), rows[0]);
+
+  refs.weekRangeText.textContent = `${rows[0].day} ~ ${rows[rows.length - 1].day}`;
+  refs.weekInputTotal.textContent = `${formatNumber(totalInput)} Token`;
+  refs.weekOutputTotal.textContent = `${formatNumber(totalOutput)} Token`;
+  refs.weekDailyAvg.textContent = `${formatNumber((totalInput + totalOutput) / 7)} Token`;
+  refs.weekPeakDay.textContent = `${peak.day.slice(5)} (${formatNumber(peak.total)})`;
+
+  refs.weekRows.innerHTML = rows
+    .map((r) => {
+      const wIn = Math.max(2, (r.input / maxTotal) * 100);
+      const wOut = Math.max(2, (r.output / maxTotal) * 100);
+      return `<div class="week-row"><span class="day">${r.day.slice(5)}</span><div class="week-bar"><i class="in" style="width:${wIn}%"></i><i class="out" style="width:${wOut}%"></i></div><span class="num">${formatNumber(r.total)}</span></div>`;
+    })
+    .join('');
+}
+
 function render() {
   filterRecords();
   const daily = dailyMap(state.filtered);
@@ -350,6 +403,7 @@ function render() {
   renderHeatmap(refs.outputHeatmap, daily, 'output');
   setActiveButtons();
   renderLineChart(state.lineFiltered);
+  renderWeekCard();
 
   const totalInput = state.filtered.reduce((n, r) => n + Number(r.input || 0), 0);
   const totalOutput = state.filtered.reduce((n, r) => n + Number(r.output || 0), 0);
@@ -383,7 +437,7 @@ function onChartHover(event) {
   state.hoverIndex = nearest;
   const point = state.chartPoints[nearest];
   refs.chartTooltip.hidden = false;
-  refs.chartTooltip.innerHTML = `${point.record.timestamp.slice(0, 19).replace('T', ' ')} | 输入 ${unitText(Number(point.record.input || 0))} ${unitLabel()} | 输出 ${unitText(Number(point.record.output || 0))} ${unitLabel()}`;
+  refs.chartTooltip.innerHTML = `<span class="tt-time">${point.record.timestamp.slice(0, 19).replace('T', ' ')}</span><span class="tt-val tt-in">输入 ${unitText(Number(point.record.input || 0))} ${unitLabel()}</span><span class="tt-val tt-out">输出 ${unitText(Number(point.record.output || 0))} ${unitLabel()}</span>`;
 
   refs.chartTooltip.style.left = `${event.clientX - rect.left}px`;
   refs.chartTooltip.style.top = `${event.clientY - rect.top - 12}px`;

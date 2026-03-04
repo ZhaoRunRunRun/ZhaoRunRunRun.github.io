@@ -79,6 +79,20 @@
       <p id="lineMeta" class="legend"></p>
       <p class="legend"><span class="dot red"></span>输入（红）<span class="dot blue"></span>输出（蓝）</p>
     </section>
+
+    <section class="card week-panel">
+      <div class="week-header">
+        <h2>近一周消耗概览</h2>
+        <span id="weekRangeText" class="legend"></span>
+      </div>
+      <div class="week-kpis">
+        <div class="kpi"><span>输入总量</span><strong id="weekInputTotal">0</strong></div>
+        <div class="kpi"><span>输出总量</span><strong id="weekOutputTotal">0</strong></div>
+        <div class="kpi"><span>日均总量</span><strong id="weekDailyAvg">0</strong></div>
+        <div class="kpi"><span>峰值日期</span><strong id="weekPeakDay">-</strong></div>
+      </div>
+      <div id="weekRows" class="week-rows"></div>
+    </section>
   </main>
 
   <script src="./script.js"></script>
