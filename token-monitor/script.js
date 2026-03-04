@@ -5,11 +5,11 @@ const state = {
   records: [],
   filtered: [],
   lineFiltered: [],
-  start: '',
-  end: '',
   theme: 'auto',
   quickRange: 'custom',
-  unit: 'token'
+  unit: 'token',
+  hoverIndex: -1,
+  chartPoints: []
 };
 
 const refs = {
@@ -22,10 +22,11 @@ const refs = {
   statusText: document.getElementById('statusText'),
   lineChart: document.getElementById('lineChart'),
   lineMeta: document.getElementById('lineMeta'),
+  chartTooltip: document.getElementById('chartTooltip'),
   autoTheme: document.getElementById('autoTheme'),
   darkTheme: document.getElementById('darkTheme'),
   quickRangeGroup: document.getElementById('quickRangeGroup'),
-  unitSelect: document.getElementById('unitSelect')
+  unitGroup: document.getElementById('unitGroup')
 };
 
 function isoDate(date) {
@@ -44,8 +45,13 @@ function unitLabel() {
   return state.unit === 'k' ? 'K Token' : 'Token';
 }
 
-function unitValue(v) {
+function toUnit(v) {
   return state.unit === 'k' ? v / 1000 : v;
+}
+
+function unitText(v) {
+  const n = toUnit(v);
+  return state.unit === 'k' ? `${n.toFixed(2)} K` : `${formatNumber(n)}`;
 }
 
 function applyTheme() {
@@ -125,6 +131,25 @@ function renderHeatmap(container, dailyValues, type) {
   });
 }
 
+function setDateOptions() {
+  const days = Array.from(new Set(state.records.map((r) => r.timestamp.slice(0, 10))));
+  const startValue = refs.startDate.value;
+  const endValue = refs.endDate.value;
+
+  const options = ['<option value="">全部</option>']
+    .concat(days.map((d) => `<option value="${d}">${d}</option>`))
+    .join('');
+
+  refs.startDate.innerHTML = options;
+  refs.endDate.innerHTML = options;
+
+  const min = days[0] || '';
+  const max = days[days.length - 1] || '';
+
+  refs.startDate.value = days.includes(startValue) ? startValue : min;
+  refs.endDate.value = days.includes(endValue) ? endValue : max;
+}
+
 function calcLineRecords() {
   if (state.quickRange === 'custom') return state.filtered;
   if (state.quickRange === 'all') return state.records;
@@ -142,13 +167,25 @@ function calcLineRecords() {
   return state.records.filter((r) => new Date(r.timestamp).getTime() >= cutoff);
 }
 
+function drawGrid(ctx, w, h, pad, innerH) {
+  ctx.strokeStyle = 'rgba(148, 163, 184, 0.3)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i += 1) {
+    const y = pad + (innerH * i) / 4;
+    ctx.beginPath();
+    ctx.moveTo(pad, y);
+    ctx.lineTo(w - pad, y);
+    ctx.stroke();
+  }
+}
+
 function drawAxisLabels(ctx, dpr, w, h, pad, maxYValue, firstTs, lastTs) {
   const textColor = getComputedStyle(document.documentElement).getPropertyValue('--muted').trim() || '#94a3b8';
   ctx.fillStyle = textColor;
   ctx.font = `${11 * dpr}px sans-serif`;
 
   for (let i = 0; i <= 4; i += 1) {
-    const val = unitValue((maxYValue * (4 - i)) / 4);
+    const val = toUnit((maxYValue * (4 - i)) / 4);
     const y = pad + ((h - pad * 2) * i) / 4 + 4 * dpr;
     ctx.fillText(`${val.toFixed(state.unit === 'k' ? 1 : 0)} ${unitLabel()}`, 8 * dpr, y);
   }
@@ -160,6 +197,20 @@ function drawAxisLabels(ctx, dpr, w, h, pad, maxYValue, firstTs, lastTs) {
     const textWidth = ctx.measureText(right).width;
     ctx.fillText(right, w - pad - textWidth, h - 10 * dpr);
   }
+}
+
+function smoothLine(ctx, points) {
+  if (!points.length) return;
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, points[0].y);
+  for (let i = 1; i < points.length - 1; i += 1) {
+    const xc = (points[i].x + points[i + 1].x) / 2;
+    const yc = (points[i].y + points[i + 1].y) / 2;
+    ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+  }
+  const last = points[points.length - 1];
+  ctx.lineTo(last.x, last.y);
+  ctx.stroke();
 }
 
 function renderLineChart(records) {
@@ -178,16 +229,10 @@ function renderLineChart(records) {
   const innerH = h - pad * 2;
 
   ctx.clearRect(0, 0, w, h);
-  ctx.strokeStyle = 'rgba(148, 163, 184, 0.3)';
-  ctx.lineWidth = 1;
+  drawGrid(ctx, w, h, pad, innerH);
 
-  for (let i = 0; i <= 4; i += 1) {
-    const y = pad + (innerH * i) / 4;
-    ctx.beginPath();
-    ctx.moveTo(pad, y);
-    ctx.lineTo(w - pad, y);
-    ctx.stroke();
-  }
+  refs.chartTooltip.hidden = true;
+  state.chartPoints = [];
 
   if (!records.length) {
     refs.lineMeta.textContent = '当前范围暂无数据';
@@ -201,37 +246,68 @@ function renderLineChart(records) {
 
   drawAxisLabels(ctx, dpr, w, h, pad, maxRaw, records[0].timestamp, records[records.length - 1].timestamp);
 
-  if (records.length < 2) {
-    refs.lineMeta.textContent = `范围 ${records[0].timestamp.slice(0, 16)} | 单位 ${unitLabel()} | 仅 1 条记录`;
-    return;
-  }
+  const pointsInput = [];
+  const pointsOutput = [];
 
-  function drawLine(color, key) {
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2 * dpr;
+  records.forEach((r, i) => {
+    const x = records.length === 1 ? pad + innerW / 2 : pad + (innerW * i) / (records.length - 1);
+    const yIn = pad + innerH - (Number(r.input || 0) / maxRaw) * innerH;
+    const yOut = pad + innerH - (Number(r.output || 0) / maxRaw) * innerH;
+    pointsInput.push({ x, y: yIn, index: i });
+    pointsOutput.push({ x, y: yOut, index: i });
+    state.chartPoints.push({ x, index: i, record: r, yIn, yOut });
+  });
+
+  const inputColor = getComputedStyle(document.documentElement).getPropertyValue('--input-line').trim();
+  const outputColor = getComputedStyle(document.documentElement).getPropertyValue('--output-line').trim();
+
+  ctx.lineWidth = 2 * dpr;
+  ctx.strokeStyle = inputColor;
+  smoothLine(ctx, pointsInput);
+  ctx.strokeStyle = outputColor;
+  smoothLine(ctx, pointsOutput);
+
+  pointsInput.forEach((p) => {
     ctx.beginPath();
-    records.forEach((r, i) => {
-      const x = pad + (innerW * i) / (records.length - 1);
-      const y = pad + innerH - (Number(r[key] || 0) / maxRaw) * innerH;
-      if (i === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    });
-    ctx.stroke();
-  }
+    ctx.fillStyle = inputColor;
+    ctx.arc(p.x, p.y, 2.5 * dpr, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  pointsOutput.forEach((p) => {
+    ctx.beginPath();
+    ctx.fillStyle = outputColor;
+    ctx.arc(p.x, p.y, 2.5 * dpr, 0, Math.PI * 2);
+    ctx.fill();
+  });
 
-  drawLine(getComputedStyle(document.documentElement).getPropertyValue('--input-line').trim(), 'input');
-  drawLine(getComputedStyle(document.documentElement).getPropertyValue('--output-line').trim(), 'output');
+  if (state.hoverIndex >= 0 && state.hoverIndex < state.chartPoints.length) {
+    const hp = state.chartPoints[state.hoverIndex];
+    ctx.strokeStyle = 'rgba(148, 163, 184, 0.55)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(hp.x, pad);
+    ctx.lineTo(hp.x, h - pad);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.fillStyle = inputColor;
+    ctx.arc(hp.x, hp.yIn, 5 * dpr, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.fillStyle = outputColor;
+    ctx.arc(hp.x, hp.yOut, 5 * dpr, 0, Math.PI * 2);
+    ctx.fill();
+  }
 
   const totalInput = records.reduce((n, r) => n + Number(r.input || 0), 0);
   const totalOutput = records.reduce((n, r) => n + Number(r.output || 0), 0);
-  refs.lineMeta.textContent = `范围 ${records[0].timestamp.slice(0, 16)} ~ ${records[records.length - 1].timestamp.slice(0, 16)} | 单位 ${unitLabel()} | 输入 ${state.unit === 'k' ? (totalInput / 1000).toFixed(1) : formatNumber(totalInput)} | 输出 ${state.unit === 'k' ? (totalOutput / 1000).toFixed(1) : formatNumber(totalOutput)}`;
+  refs.lineMeta.textContent = `范围 ${records[0].timestamp.slice(0, 16)} ~ ${records[records.length - 1].timestamp.slice(0, 16)} | 单位 ${unitLabel()} | 输入 ${unitText(totalInput)} | 输出 ${unitText(totalOutput)}`;
 }
 
 function filterRecords() {
   const start = refs.startDate.value;
   const end = refs.endDate.value;
-  state.start = start;
-  state.end = end;
   state.filtered = state.records.filter((r) => {
     const day = r.timestamp.slice(0, 10);
     if (start && day < start) return false;
@@ -241,9 +317,12 @@ function filterRecords() {
   state.lineFiltered = calcLineRecords();
 }
 
-function setActiveRangeBtn() {
+function setActiveButtons() {
   refs.quickRangeGroup.querySelectorAll('.range-btn').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.range === state.quickRange);
+  });
+  refs.unitGroup.querySelectorAll('.range-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.unit === state.unit);
   });
 }
 
@@ -252,7 +331,7 @@ function render() {
   const daily = dailyMap(state.filtered);
   renderHeatmap(refs.inputHeatmap, daily, 'input');
   renderHeatmap(refs.outputHeatmap, daily, 'output');
-  setActiveRangeBtn();
+  setActiveButtons();
   renderLineChart(state.lineFiltered);
 
   const totalInput = state.filtered.reduce((n, r) => n + Number(r.input || 0), 0);
@@ -260,29 +339,65 @@ function render() {
   refs.statusText.textContent = `记录 ${state.filtered.length} 条 | 输入 ${formatNumber(totalInput)} Token | 输出 ${formatNumber(totalOutput)} Token`;
 }
 
+function onChartHover(event) {
+  if (!state.chartPoints.length) return;
+
+  const rect = refs.lineChart.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  const mx = (event.clientX - rect.left) * dpr;
+
+  let nearest = -1;
+  let best = Infinity;
+  state.chartPoints.forEach((p, i) => {
+    const dx = Math.abs(p.x - mx);
+    if (dx < best) {
+      best = dx;
+      nearest = i;
+    }
+  });
+
+  if (nearest === -1 || best > 18 * dpr) {
+    state.hoverIndex = -1;
+    refs.chartTooltip.hidden = true;
+    renderLineChart(state.lineFiltered);
+    return;
+  }
+
+  state.hoverIndex = nearest;
+  const point = state.chartPoints[nearest];
+  refs.chartTooltip.hidden = false;
+  refs.chartTooltip.innerHTML = [
+    `<strong>${point.record.timestamp.slice(0, 19).replace('T', ' ')}</strong>`,
+    `输入: ${unitText(Number(point.record.input || 0))} ${unitLabel()}`,
+    `输出: ${unitText(Number(point.record.output || 0))} ${unitLabel()}`,
+    `总计: ${unitText(Number(point.record.total || 0))} ${unitLabel()}`
+  ].join('<br/>');
+
+  refs.chartTooltip.style.left = `${event.clientX - rect.left}px`;
+  refs.chartTooltip.style.top = `${event.clientY - rect.top - 12}px`;
+
+  renderLineChart(state.lineFiltered);
+}
+
+function onChartLeave() {
+  state.hoverIndex = -1;
+  refs.chartTooltip.hidden = true;
+  renderLineChart(state.lineFiltered);
+}
+
 async function loadData() {
   const response = await fetch(`${DATA_URL}?t=${Date.now()}`);
   const payload = await response.json();
   state.records = Array.isArray(payload.records) ? payload.records : [];
   state.records.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
-
-  if (state.records.length) {
-    const min = state.records[0].timestamp.slice(0, 10);
-    const max = state.records[state.records.length - 1].timestamp.slice(0, 10);
-    refs.startDate.min = min;
-    refs.startDate.max = max;
-    refs.endDate.min = min;
-    refs.endDate.max = max;
-    if (!refs.startDate.value) refs.startDate.value = min;
-    if (!refs.endDate.value) refs.endDate.value = max;
-  }
-
+  setDateOptions();
   render();
 }
 
 function bindEvents() {
   refs.applyBtn.addEventListener('click', () => {
     state.quickRange = 'custom';
+    state.hoverIndex = -1;
     render();
   });
 
@@ -290,6 +405,7 @@ function bindEvents() {
     refs.startDate.value = '';
     refs.endDate.value = '';
     state.quickRange = 'custom';
+    state.hoverIndex = -1;
     render();
   });
 
@@ -310,14 +426,20 @@ function bindEvents() {
     const target = e.target.closest('.range-btn');
     if (!target) return;
     state.quickRange = target.dataset.range;
+    state.hoverIndex = -1;
     render();
   });
 
-  refs.unitSelect.addEventListener('change', (e) => {
-    state.unit = e.target.value;
+  refs.unitGroup.addEventListener('click', (e) => {
+    const target = e.target.closest('.range-btn');
+    if (!target) return;
+    state.unit = target.dataset.unit;
     renderLineChart(state.lineFiltered);
+    setActiveButtons();
   });
 
+  refs.lineChart.addEventListener('mousemove', onChartHover);
+  refs.lineChart.addEventListener('mouseleave', onChartLeave);
   window.addEventListener('resize', () => renderLineChart(state.lineFiltered));
 }
 

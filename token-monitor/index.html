@@ -28,11 +28,11 @@
     <section class="filters card">
       <label>
         开始日期
-        <input id="startDate" type="date" />
+        <select id="startDate"></select>
       </label>
       <label>
         结束日期
-        <input id="endDate" type="date" />
+        <select id="endDate"></select>
       </label>
       <button id="applyBtn" type="button">应用筛选</button>
       <button id="resetBtn" type="button" class="ghost">重置</button>
@@ -66,16 +66,16 @@
             <button type="button" class="range-btn" data-range="30d">30day</button>
             <button type="button" class="range-btn" data-range="all">全部</button>
           </div>
-          <label class="unit-select-wrap">
-            单位
-            <select id="unitSelect">
-              <option value="token">Token</option>
-              <option value="k">K Token</option>
-            </select>
-          </label>
+          <div class="range-group" id="unitGroup" role="group" aria-label="单位选择">
+            <button type="button" class="range-btn" data-unit="token">Token</button>
+            <button type="button" class="range-btn" data-unit="k">K Token</button>
+          </div>
         </div>
       </div>
-      <canvas id="lineChart" width="1400" height="420" aria-label="Token trend chart"></canvas>
+      <div class="chart-wrap">
+        <canvas id="lineChart" width="1400" height="420" aria-label="Token trend chart"></canvas>
+        <div id="chartTooltip" class="chart-tooltip" hidden></div>
+      </div>
       <p id="lineMeta" class="legend"></p>
       <p class="legend"><span class="dot red"></span>输入（红）<span class="dot blue"></span>输出（蓝）</p>
     </section>
