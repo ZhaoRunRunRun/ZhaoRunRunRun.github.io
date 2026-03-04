@@ -116,12 +116,24 @@ button.ghost {
 
 #statusText { color: var(--muted); font-size: 13px; }
 
-.meta-panel {
+.title-block {
+  display: grid;
+  gap: 6px;
+}
+
+.title-row {
   display: flex;
-  gap: 16px;
+  align-items: center;
   flex-wrap: wrap;
+  gap: 10px;
+}
+
+.inline-meta {
   color: var(--muted);
   font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .repo-icon-link {
