@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>赵润润 · 站点导航</title>
+  <meta name="description" content="ZhaoRunRunRun.github.io 子页面导航" />
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --brand: #2563eb;
+      --ok: #059669;
+      --bad: #dc2626;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, #dbeafe 0%, transparent 45%), var(--bg);
+      color: var(--text);
+    }
+
+    .wrap {
+      width: min(1080px, 92vw);
+      margin: 0 auto;
+      padding: 48px 0 64px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.1;
+      letter-spacing: 0.01em;
+    }
+
+    .sub {
+      margin: 12px 0 30px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      display: block;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 18px 16px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: var(--shadow);
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: #bfdbfe;
+      box-shadow: 0 14px 34px rgba(37, 99, 235, 0.16);
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .name {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .desc {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      min-height: 48px;
+    }
+
+    .url {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #4b5563;
+      word-break: break-all;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-size: 12px;
+      color: var(--muted);
+      background: #f9fafb;
+      white-space: nowrap;
+    }
+
+    .status {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 20px;
+    }
+
+    .ok { color: var(--ok); }
+    .bad { color: var(--bad); }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>赵润润 · 站点导航</h1>
+    <p class="sub">把常用子页面集中到一个入口，后续新增页面直接在这里补一条就行。</p>
+
+    <section class="grid">
+      <a class="card" href="/token-monitor/" target="_self">
+        <div class="top">
+          <div class="name">Token Monitor</div>
+          <div class="tag">数据看板</div>
+        </div>
+        <p class="desc">查看会话 token 输入/输出趋势、分页明细与统计汇总。</p>
+        <div class="url">/token-monitor/</div>
+      </a>
+
+      <a class="card" href="/tech-news/" target="_self">
+        <div class="top">
+          <div class="name">日知录</div>
+          <div class="tag">资讯站</div>
+        </div>
+        <p class="desc">每日科技与时事资讯聚合，含热点、报告与 AI 专栏。</p>
+        <div class="url">/tech-news/</div>
+      </a>
+
+      <a class="card" href="/3dgs-tracker/" target="_self">
+        <div class="top">
+          <div class="name">3DGS Tracker</div>
+          <div class="tag">研究追踪</div>
+        </div>
+        <p class="desc">3D Gaussian Splatting 论文/项目追踪页，用于技术学习和选题。</p>
+        <div class="url">/3dgs-tracker/</div>
+      </a>
+    </section>
+
+    <div class="status" id="statusLine">正在检查页面可达性...</div>
+  </main>
+
+  <script>
+    const links = [
+      "/token-monitor/",
+      "/tech-news/",
+      "/3dgs-tracker/"
+    ];
+
+    const statusLine = document.getElementById("statusLine");
+
+    async function checkRoute(path) {
+      try {
+        const res = await fetch(path, { method: "HEAD", cache: "no-store" });
+        return { path, ok: res.ok, code: res.status };
+      } catch (_) {
+        return { path, ok: false, code: "ERR" };
+      }
+    }
+
+    (async function run() {
+      const results = await Promise.all(links.map(checkRoute));
+      const bad = results.filter(r => !r.ok);
+      if (!bad.length) {
+        statusLine.innerHTML = '<span class="ok">全部子页面可访问</span> · 检查时间 ' + new Date().toLocaleString("zh-CN");
+      } else {
+        statusLine.innerHTML = '<span class="bad">存在不可访问页面：</span> ' + bad.map(r => r.path + ' (' + r.code + ')').join(', ');
+      }
+    })();
+  </script>
+</body>
+</html>
