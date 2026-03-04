@@ -1,0 +1,40 @@
+{
+  "site": "https://zhaorunrunrun.github.io",
+  "generated_at": "2026-03-04T11:59:38.150515Z",
+  "count": 3,
+  "items": [
+    {
+      "path": "/tech-news/",
+      "slug": "tech-news",
+      "title": "日知录",
+      "desc": "每日科技与时事资讯聚合，含热点、报告与 AI 专栏。",
+      "group": "内容",
+      "badge": "资讯站",
+      "emoji": "📰",
+      "featured": true,
+      "status": 200
+    },
+    {
+      "path": "/token-monitor/",
+      "slug": "token-monitor",
+      "title": "Token Monitor",
+      "desc": "查看会话 token 输入/输出趋势、分页明细与统计汇总。",
+      "group": "工具",
+      "badge": "数据看板",
+      "emoji": "📊",
+      "featured": true,
+      "status": 200
+    },
+    {
+      "path": "/3dgs-tracker/",
+      "slug": "3dgs-tracker",
+      "title": "3DGS Tracker",
+      "desc": "3D Gaussian Splatting 研究追踪页，用于技术学习和选题。",
+      "group": "研究",
+      "badge": "追踪",
+      "emoji": "🧠",
+      "featured": true,
+      "status": 200
+    }
+  ]
+}

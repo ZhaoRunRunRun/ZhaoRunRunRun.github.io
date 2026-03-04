@@ -7,161 +7,267 @@
   <meta name="description" content="ZhaoRunRunRun.github.io 子页面导航" />
   <style>
     :root {
-      --bg: #f5f7fb;
+      --bg: #f4f7ff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --line: #dbe2f0;
       --card: #ffffff;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --line: #e5e7eb;
-      --brand: #2563eb;
+      --brand: #0f766e;
+      --brand-2: #0ea5e9;
+      --chip: #eef2ff;
       --ok: #059669;
       --bad: #dc2626;
-      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      background: radial-gradient(1200px 600px at 20% -10%, #dbeafe 0%, transparent 45%), var(--bg);
       color: var(--text);
+      font-family: "Avenir Next", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(900px 400px at 10% -10%, #bfdbfe 0%, transparent 45%),
+        radial-gradient(900px 400px at 90% 0%, #a7f3d0 0%, transparent 42%),
+        var(--bg);
     }
 
     .wrap {
-      width: min(1080px, 92vw);
+      width: min(1120px, 92vw);
       margin: 0 auto;
-      padding: 48px 0 64px;
+      padding: 40px 0 64px;
     }
 
-    h1 {
+    .hero {
+      background: linear-gradient(130deg, rgba(15,118,110,0.92), rgba(14,165,233,0.9));
+      border-radius: 20px;
+      padding: 28px;
+      color: #f8fafc;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
       margin: 0;
       font-size: clamp(28px, 4vw, 42px);
-      line-height: 1.1;
       letter-spacing: 0.01em;
     }
 
-    .sub {
-      margin: 12px 0 30px;
-      color: var(--muted);
-      font-size: 16px;
+    .hero p {
+      margin: 10px 0 0;
+      opacity: 0.95;
+      line-height: 1.65;
+    }
+
+    .hero .meta {
+      margin-top: 12px;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .section {
+      margin-top: 24px;
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
+      gap: 14px;
     }
 
     .card {
       display: block;
+      color: inherit;
+      text-decoration: none;
       background: var(--card);
       border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 18px 18px 16px;
-      text-decoration: none;
-      color: inherit;
+      border-radius: 16px;
+      overflow: hidden;
       box-shadow: var(--shadow);
       transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
     }
 
     .card:hover {
-      transform: translateY(-2px);
-      border-color: #bfdbfe;
-      box-shadow: 0 14px 34px rgba(37, 99, 235, 0.16);
+      transform: translateY(-3px);
+      border-color: #93c5fd;
+      box-shadow: 0 14px 30px rgba(14, 116, 144, 0.18);
     }
 
-    .top {
+    .thumb {
+      height: 86px;
+      padding: 12px 14px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
+      align-items: flex-start;
+      background: linear-gradient(145deg, #e0f2fe, #ecfeff 55%, #dcfce7);
+      border-bottom: 1px solid var(--line);
     }
 
-    .name {
-      font-weight: 700;
+    .thumb .emoji {
+      font-size: 26px;
+    }
+
+    .badge {
+      font-size: 12px;
+      color: #155e75;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid #bae6fd;
+      border-radius: 999px;
+      padding: 3px 9px;
+      white-space: nowrap;
+    }
+
+    .content {
+      padding: 14px;
+    }
+
+    .title {
       font-size: 18px;
+      font-weight: 700;
+      margin: 0;
     }
 
     .desc {
-      margin: 0;
+      margin: 8px 0 10px;
       color: var(--muted);
       line-height: 1.6;
       min-height: 48px;
     }
 
     .url {
-      margin-top: 12px;
-      font-size: 13px;
-      color: #4b5563;
-      word-break: break-all;
+      font-size: 12px;
+      color: #334155;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 4px 8px;
+      display: inline-block;
     }
 
-    .tag {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 2px 9px;
+    .groups {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .chip {
       font-size: 12px;
-      color: var(--muted);
-      background: #f9fafb;
-      white-space: nowrap;
+      border-radius: 999px;
+      border: 1px solid #cbd5e1;
+      background: var(--chip);
+      color: #334155;
+      padding: 4px 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .chip.active {
+      background: #0f172a;
+      color: #f8fafc;
+      border-color: #0f172a;
     }
 
     .status {
-      font-size: 12px;
+      margin-top: 18px;
+      font-size: 13px;
       color: var(--muted);
-      margin-top: 20px;
     }
 
     .ok { color: var(--ok); }
     .bad { color: var(--bad); }
+
+    @media (max-width: 700px) {
+      .hero { padding: 20px; }
+      .thumb { height: 78px; }
+    }
   </style>
 </head>
 <body>
   <main class="wrap">
-    <h1>赵润润 · 站点导航</h1>
-    <p class="sub">把常用子页面集中到一个入口，后续新增页面直接在这里补一条就行。</p>
+    <header class="hero">
+      <h1>赵润润 · 站点导航</h1>
+      <p>一个入口，直达所有可用子页面。主页会按分组展示，并优先置顶推荐页面。</p>
+      <div class="meta" id="metaLine">正在加载导航数据...</div>
+    </header>
 
-    <section class="grid">
-      <a class="card" href="/token-monitor/" target="_self">
-        <div class="top">
-          <div class="name">Token Monitor</div>
-          <div class="tag">数据看板</div>
-        </div>
-        <p class="desc">查看会话 token 输入/输出趋势、分页明细与统计汇总。</p>
-        <div class="url">/token-monitor/</div>
-      </a>
-
-      <a class="card" href="/tech-news/" target="_self">
-        <div class="top">
-          <div class="name">日知录</div>
-          <div class="tag">资讯站</div>
-        </div>
-        <p class="desc">每日科技与时事资讯聚合，含热点、报告与 AI 专栏。</p>
-        <div class="url">/tech-news/</div>
-      </a>
-
-      <a class="card" href="/3dgs-tracker/" target="_self">
-        <div class="top">
-          <div class="name">3DGS Tracker</div>
-          <div class="tag">研究追踪</div>
-        </div>
-        <p class="desc">3D Gaussian Splatting 论文/项目追踪页，用于技术学习和选题。</p>
-        <div class="url">/3dgs-tracker/</div>
-      </a>
+    <section class="section">
+      <h2 class="section-title">⭐ 置顶推荐</h2>
+      <div class="grid" id="featuredGrid"></div>
     </section>
 
-    <div class="status" id="statusLine">正在检查页面可达性...</div>
+    <section class="section">
+      <h2 class="section-title">🧭 全部页面</h2>
+      <div class="groups" id="groupChips"></div>
+      <div class="grid" id="allGrid"></div>
+      <div class="status" id="statusLine"></div>
+    </section>
   </main>
 
   <script>
-    const links = [
-      "/token-monitor/",
-      "/tech-news/",
-      "/3dgs-tracker/"
-    ];
-
+    const metaLine = document.getElementById("metaLine");
+    const featuredGrid = document.getElementById("featuredGrid");
+    const allGrid = document.getElementById("allGrid");
+    const groupChips = document.getElementById("groupChips");
     const statusLine = document.getElementById("statusLine");
+
+    let allItems = [];
+    let activeGroup = "全部";
+
+    function escapeHtml(text) {
+      return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function cardHtml(item) {
+      const path = escapeHtml(item.path);
+      return `
+        <a class="card" href="${path}">
+          <div class="thumb">
+            <div class="emoji">${escapeHtml(item.emoji || "🔗")}</div>
+            <div class="badge">${escapeHtml(item.badge || "页面")}</div>
+          </div>
+          <div class="content">
+            <p class="title">${escapeHtml(item.title || item.slug)}</p>
+            <p class="desc">${escapeHtml(item.desc || "")}</p>
+            <span class="url">${path}</span>
+          </div>
+        </a>`;
+    }
+
+    function renderGroups(items) {
+      const groups = ["全部", ...Array.from(new Set(items.map(i => i.group || "其他")))];
+      groupChips.innerHTML = groups
+        .map(g => `<button class="chip ${g === activeGroup ? "active" : ""}" data-group="${escapeHtml(g)}">${escapeHtml(g)}</button>`)
+        .join("");
+
+      groupChips.querySelectorAll(".chip").forEach(btn => {
+        btn.addEventListener("click", () => {
+          activeGroup = btn.dataset.group || "全部";
+          renderAll();
+          renderGroups(allItems);
+        });
+      });
+    }
+
+    function renderAll() {
+      const data = activeGroup === "全部"
+        ? allItems
+        : allItems.filter(i => (i.group || "其他") === activeGroup);
+
+      allGrid.innerHTML = data.map(cardHtml).join("");
+    }
 
     async function checkRoute(path) {
       try {
@@ -172,13 +278,38 @@
       }
     }
 
-    (async function run() {
-      const results = await Promise.all(links.map(checkRoute));
-      const bad = results.filter(r => !r.ok);
-      if (!bad.length) {
-        statusLine.innerHTML = '<span class="ok">全部子页面可访问</span> · 检查时间 ' + new Date().toLocaleString("zh-CN");
-      } else {
-        statusLine.innerHTML = '<span class="bad">存在不可访问页面：</span> ' + bad.map(r => r.path + ' (' + r.code + ')').join(', ');
+    async function loadRoutes() {
+      const resp = await fetch("./routes.json", { cache: "no-store" });
+      if (!resp.ok) throw new Error("routes.json 加载失败");
+      return resp.json();
+    }
+
+    (async function init() {
+      try {
+        const data = await loadRoutes();
+        allItems = Array.isArray(data.items) ? data.items : [];
+
+        const featured = allItems.filter(i => i.featured);
+        featuredGrid.innerHTML = featured.map(cardHtml).join("");
+
+        renderGroups(allItems);
+        renderAll();
+
+        const gen = data.generated_at ? new Date(data.generated_at).toLocaleString("zh-CN") : "-";
+        metaLine.textContent = `共 ${allItems.length} 个可用页面 · 最近生成 ${gen}`;
+
+        const checks = await Promise.all(allItems.map(i => checkRoute(i.path)));
+        const bad = checks.filter(r => !r.ok);
+        if (bad.length === 0) {
+          statusLine.innerHTML = '<span class="ok">可达性检查通过</span> · 所有导航页面可访问';
+        } else {
+          statusLine.innerHTML = '<span class="bad">部分页面不可访问：</span> ' + bad.map(r => `${r.path} (${r.code})`).join(', ');
+        }
+      } catch (err) {
+        metaLine.textContent = "导航数据加载失败";
+        featuredGrid.innerHTML = "";
+        allGrid.innerHTML = "";
+        statusLine.innerHTML = '<span class="bad">错误：</span>' + (err && err.message ? err.message : "未知错误");
       }
     })();
   </script>
