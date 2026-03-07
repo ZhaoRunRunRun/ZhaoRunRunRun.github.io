@@ -50,12 +50,21 @@ const refs = {
   nowClock: document.getElementById('nowClock')
 };
 
+const SHANGHAI_TZ = 'Asia/Shanghai';
+const SHANGHAI_DATE_FORMATTER = new Intl.DateTimeFormat('en-CA', {
+  timeZone: SHANGHAI_TZ,
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit'
+});
+
 function isoDate(date) {
-  return date.toISOString().slice(0, 10);
+  return SHANGHAI_DATE_FORMATTER.format(date);
 }
 
 function parseDate(v) {
-  return new Date(`${v}T00:00:00`);
+  const [year, month, day] = v.split('-').map(Number);
+  return new Date(year, month - 1, day);
 }
 
 function formatNumber(v) {
@@ -66,7 +75,28 @@ function formatDateTime(iso) {
   if (!iso) return '-';
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return '-';
-  return d.toLocaleString('zh-CN', { hour12: false });
+  return d.toLocaleString('zh-CN', { hour12: false, timeZone: SHANGHAI_TZ });
+}
+
+function formatTimestamp(iso) {
+  if (!iso) return '-';
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '-';
+  return d.toLocaleString('zh-CN', {
+    hour12: false,
+    timeZone: SHANGHAI_TZ,
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
+
+function isDataStale() {
+  if (!state.generatedAt) return false;
+  const generatedAt = new Date(state.generatedAt);
+  if (Number.isNaN(generatedAt.getTime())) return false;
+  return Date.now() - generatedAt.getTime() > 2 * 3600 * 1000;
 }
 
 function unitLabel() {
@@ -85,7 +115,7 @@ function unitText(v) {
 function applyTheme() {
   let dark = false;
   if (state.theme === 'auto') {
-    const hour = new Date().getHours();
+    const hour = Number(new Intl.DateTimeFormat('en-GB', { timeZone: SHANGHAI_TZ, hour: '2-digit', hour12: false }).format(new Date()));
     dark = hour >= 18 || hour < 6;
   } else {
     dark = state.theme === 'dark';
@@ -104,7 +134,7 @@ function setTheme(mode) {
 function dailyMap(records) {
   const map = new Map();
   records.forEach((item) => {
-    const key = item.timestamp.slice(0, 10);
+    const key = isoDate(new Date(item.timestamp));
     const prev = map.get(key) || { input: 0, output: 0 };
     prev.input += Number(item.input || 0);
     prev.output += Number(item.output || 0);
@@ -184,7 +214,7 @@ function buildDateMenu(menuEl, type, days) {
 }
 
 function setDateOptions() {
-  const days = Array.from(new Set(state.records.map((r) => r.timestamp.slice(0, 10))));
+  const days = Array.from(new Set(state.records.map((r) => isoDate(new Date(r.timestamp)))));
   const startValue = refs.startDate.value;
   const endValue = refs.endDate.value;
 
@@ -221,12 +251,37 @@ function drawGrid(ctx, w, h, pad, innerH) {
   ctx.strokeStyle = 'rgba(148, 163, 184, 0.3)';
   ctx.lineWidth = 1;
   for (let i = 0; i <= 4; i += 1) {
-    const y = pad + (innerH * i) / 4;
+    const y = pad.top + (innerH * i) / 4;
     ctx.beginPath();
-    ctx.moveTo(pad, y);
-    ctx.lineTo(w - pad, y);
+    ctx.moveTo(pad.left, y);
+    ctx.lineTo(w - pad.right, y);
     ctx.stroke();
   }
+}
+
+function getChartPadding(ctx, dpr, maxYValue, records) {
+  ctx.font = `${11 * dpr}px sans-serif`;
+  let maxLabelWidth = 0;
+  for (let i = 0; i <= 4; i += 1) {
+    const val = toUnit((maxYValue * (4 - i)) / 4);
+    const label = `${val.toFixed(state.unit === 'k' ? 1 : 0)} ${unitLabel()}`;
+    maxLabelWidth = Math.max(maxLabelWidth, ctx.measureText(label).width);
+  }
+
+  let timeWidth = 0;
+  if (records.length) {
+    timeWidth = Math.max(
+      ctx.measureText(formatTimestamp(records[0].timestamp)).width,
+      ctx.measureText(formatTimestamp(records[records.length - 1].timestamp)).width
+    );
+  }
+
+  return {
+    left: Math.max(78, Math.ceil(maxLabelWidth / dpr) + 24) * dpr,
+    right: Math.max(28, Math.ceil(timeWidth / dpr / 2) + 12) * dpr,
+    top: 24 * dpr,
+    bottom: 34 * dpr
+  };
 }
 
 function drawAxisLabels(ctx, dpr, w, h, pad, maxYValue, firstTs, lastTs) {
@@ -236,16 +291,16 @@ function drawAxisLabels(ctx, dpr, w, h, pad, maxYValue, firstTs, lastTs) {
 
   for (let i = 0; i <= 4; i += 1) {
     const val = toUnit((maxYValue * (4 - i)) / 4);
-    const y = pad + ((h - pad * 2) * i) / 4 + 4 * dpr;
+    const y = pad.top + ((h - pad.top - pad.bottom) * i) / 4 + 4 * dpr;
     ctx.fillText(`${val.toFixed(state.unit === 'k' ? 1 : 0)} ${unitLabel()}`, 8 * dpr, y);
   }
 
   if (firstTs && lastTs) {
-    const left = firstTs.slice(5, 16).replace('T', ' ');
-    const right = lastTs.slice(5, 16).replace('T', ' ');
-    ctx.fillText(left, pad, h - 10 * dpr);
+    const left = formatTimestamp(firstTs);
+    const right = formatTimestamp(lastTs);
+    ctx.fillText(left, pad.left, h - 10 * dpr);
     const textWidth = ctx.measureText(right).width;
-    ctx.fillText(right, w - pad - textWidth, h - 10 * dpr);
+    ctx.fillText(right, w - pad.right - textWidth, h - 10 * dpr);
   }
 }
 
@@ -291,12 +346,8 @@ function renderLineChart(records) {
 
   const w = canvas.width;
   const h = canvas.height;
-  const pad = 62 * dpr;
-  const innerW = w - pad * 2;
-  const innerH = h - pad * 2;
 
   ctx.clearRect(0, 0, w, h);
-  drawGrid(ctx, w, h, pad, innerH);
 
   if (state.hoverIndex < 0) refs.chartTooltip.hidden = true;
   state.chartPoints = [];
@@ -311,15 +362,20 @@ function renderLineChart(records) {
     1
   );
 
+  const pad = getChartPadding(ctx, dpr, maxRaw, records);
+  const innerW = w - pad.left - pad.right;
+  const innerH = h - pad.top - pad.bottom;
+
+  drawGrid(ctx, w, h, pad.left, innerH);
   drawAxisLabels(ctx, dpr, w, h, pad, maxRaw, records[0].timestamp, records[records.length - 1].timestamp);
 
   const pointsInput = [];
   const pointsOutput = [];
 
   records.forEach((r, i) => {
-    const x = records.length === 1 ? pad + innerW / 2 : pad + (innerW * i) / (records.length - 1);
-    const yIn = pad + innerH - (Number(r.input || 0) / maxRaw) * innerH;
-    const yOut = pad + innerH - (Number(r.output || 0) / maxRaw) * innerH;
+    const x = records.length === 1 ? pad.left + innerW / 2 : pad.left + (innerW * i) / (records.length - 1);
+    const yIn = pad.top + innerH - (Number(r.input || 0) / maxRaw) * innerH;
+    const yOut = pad.top + innerH - (Number(r.output || 0) / maxRaw) * innerH;
     pointsInput.push({ x, y: yIn, index: i });
     pointsOutput.push({ x, y: yOut, index: i });
     state.chartPoints.push({ x, index: i, record: r, yIn, yOut });
@@ -363,14 +419,14 @@ function renderLineChart(records) {
 
   const totalInput = records.reduce((n, r) => n + Number(r.input || 0), 0);
   const totalOutput = records.reduce((n, r) => n + Number(r.output || 0), 0);
-  refs.lineMeta.textContent = `范围 ${records[0].timestamp.slice(0, 16)} ~ ${records[records.length - 1].timestamp.slice(0, 16)} | 单位 ${unitLabel()} | 输入 ${unitText(totalInput)} | 输出 ${unitText(totalOutput)}`;
+  refs.lineMeta.textContent = `范围 ${formatTimestamp(records[0].timestamp)} ~ ${formatTimestamp(records[records.length - 1].timestamp)} | 单位 ${unitLabel()} | 输入 ${unitText(totalInput)} | 输出 ${unitText(totalOutput)}`;
 }
 
 function filterRecords() {
   const start = refs.startDate.value;
   const end = refs.endDate.value;
   state.filtered = state.records.filter((r) => {
-    const day = r.timestamp.slice(0, 10);
+    const day = isoDate(new Date(r.timestamp));
     if (start && day < start) return false;
     if (end && day > end) return false;
     return true;
@@ -406,7 +462,7 @@ function renderWeekCard() {
 
   const dayMap = new Map();
   state.records.forEach((r) => {
-    const d = r.timestamp.slice(0, 10);
+    const d = isoDate(new Date(r.timestamp));
     if (!dayMap.has(d)) dayMap.set(d, { input: 0, output: 0 });
     const row = dayMap.get(d);
     row.input += Number(r.input || 0);
@@ -497,7 +553,7 @@ function onChartHover(event) {
   state.hoverIndex = nearest;
   const point = state.chartPoints[nearest];
   refs.chartTooltip.hidden = false;
-  refs.chartTooltip.innerHTML = `<span class="tt-time">${point.record.timestamp.slice(0, 19).replace('T', ' ')}</span><span class="tt-val tt-in">输入 ${unitText(Number(point.record.input || 0))} ${unitLabel()}</span><span class="tt-val tt-out">输出 ${unitText(Number(point.record.output || 0))} ${unitLabel()}</span>`;
+  refs.chartTooltip.innerHTML = `<span class="tt-time">${formatTimestamp(point.record.timestamp)}</span><span class="tt-val tt-in">输入 ${unitText(Number(point.record.input || 0))} ${unitLabel()}</span><span class="tt-val tt-out">输出 ${unitText(Number(point.record.output || 0))} ${unitLabel()}</span>`;
 
   refs.chartTooltip.style.left = `${event.clientX - rect.left}px`;
   refs.chartTooltip.style.top = `${event.clientY - rect.top - 12}px`;
@@ -518,7 +574,7 @@ async function loadData() {
   state.generatedAt = payload.generatedAt || '';
   state.records.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
   setDateOptions();
-  refs.refreshAt.textContent = formatDateTime(state.generatedAt || new Date().toISOString());
+  refs.refreshAt.textContent = `${formatDateTime(state.generatedAt || new Date().toISOString())}${isDataStale() ? '（数据待同步）' : ''}`;
   render();
 }
 

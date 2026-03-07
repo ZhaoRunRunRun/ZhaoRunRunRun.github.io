@@ -52,7 +52,7 @@ def load_records_from_sessions(state_dir):
         return records
 
     for session_key, meta in index.items():
-        if not session_key.startswith('agent:main:feishu:direct:'):
+        if not session_key.startswith('agent:main:feishu:'):
             continue
         session_file = meta.get('sessionFile') or os.path.join(
             state_dir,

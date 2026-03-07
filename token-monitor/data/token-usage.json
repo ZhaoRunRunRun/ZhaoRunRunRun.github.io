@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-04T09:12:58.057757+00:00",
+  "generatedAt": "2026-03-07T12:37:21.525972+00:00",
   "records": [
     {
       "timestamp": "2026-03-03T13:03:15.177Z",
@@ -14,22 +14,310 @@
       "total": 0
     },
     {
-      "timestamp": "2026-03-04T07:50:07.510Z",
-      "input": 12228,
-      "output": 109,
-      "total": 14897
+      "timestamp": "2026-03-04T01:53:07.266Z",
+      "input": 12927,
+      "output": 747,
+      "total": 16234
+    },
+    {
+      "timestamp": "2026-03-04T01:53:13.008Z",
+      "input": 14830,
+      "output": 190,
+      "total": 16556
+    },
+    {
+      "timestamp": "2026-03-04T01:53:19.289Z",
+      "input": 18390,
+      "output": 224,
+      "total": 20150
+    },
+    {
+      "timestamp": "2026-03-04T01:53:48.055Z",
+      "input": 18650,
+      "output": 1764,
+      "total": 21950
+    },
+    {
+      "timestamp": "2026-03-04T01:58:06.728Z",
+      "input": 3178,
+      "output": 210,
+      "total": 15164
+    },
+    {
+      "timestamp": "2026-03-04T01:58:14.291Z",
+      "input": 13939,
+      "output": 325,
+      "total": 15800
+    },
+    {
+      "timestamp": "2026-03-04T02:00:15.930Z",
+      "input": 15797,
+      "output": 257,
+      "total": 16054
+    },
+    {
+      "timestamp": "2026-03-04T02:00:19.280Z",
+      "input": 4093,
+      "output": 63,
+      "total": 15932
+    },
+    {
+      "timestamp": "2026-03-04T02:00:23.562Z",
+      "input": 14522,
+      "output": 173,
+      "total": 16231
+    },
+    {
+      "timestamp": "2026-03-04T02:00:26.491Z",
+      "input": 16247,
+      "output": 28,
+      "total": 16275
+    },
+    {
+      "timestamp": "2026-03-04T02:00:32.431Z",
+      "input": 14757,
+      "output": 121,
+      "total": 16414
+    },
+    {
+      "timestamp": "2026-03-04T02:00:36.005Z",
+      "input": 16478,
+      "output": 133,
+      "total": 16611
+    },
+    {
+      "timestamp": "2026-03-04T02:00:42.565Z",
+      "input": 15028,
+      "output": 347,
+      "total": 16911
+    },
+    {
+      "timestamp": "2026-03-04T02:06:05.572Z",
+      "input": 14424,
+      "output": 441,
+      "total": 17425
+    },
+    {
+      "timestamp": "2026-03-04T02:06:12.434Z",
+      "input": 17063,
+      "output": 207,
+      "total": 17270
+    },
+    {
+      "timestamp": "2026-03-04T02:06:18.908Z",
+      "input": 15650,
+      "output": 398,
+      "total": 17584
+    },
+    {
+      "timestamp": "2026-03-04T02:06:54.175Z",
+      "input": 15721,
+      "output": 187,
+      "total": 17444
+    },
+    {
+      "timestamp": "2026-03-04T02:07:09.837Z",
+      "input": 15869,
+      "output": 46,
+      "total": 17451
+    },
+    {
+      "timestamp": "2026-03-04T02:07:24.471Z",
+      "input": 17477,
+      "output": 600,
+      "total": 18077
+    },
+    {
+      "timestamp": "2026-03-04T02:07:30.353Z",
+      "input": 1175,
+      "output": 254,
+      "total": 18325
+    },
+    {
+      "timestamp": "2026-03-04T02:07:34.912Z",
+      "input": 16632,
+      "output": 120,
+      "total": 18288
+    },
+    {
+      "timestamp": "2026-03-04T02:07:39.386Z",
+      "input": 16742,
+      "output": 173,
+      "total": 18451
+    },
+    {
+      "timestamp": "2026-03-04T02:07:45.016Z",
+      "input": 16836,
+      "output": 282,
+      "total": 18654
+    },
+    {
+      "timestamp": "2026-03-04T02:07:59.070Z",
+      "input": 18459,
+      "output": 1104,
+      "total": 19563
+    },
+    {
+      "timestamp": "2026-03-04T02:08:11.488Z",
+      "input": 17115,
+      "output": 29,
+      "total": 18680
+    },
+    {
+      "timestamp": "2026-03-04T02:09:19.216Z",
+      "input": 17297,
+      "output": 750,
+      "total": 19583
+    },
+    {
+      "timestamp": "2026-03-04T02:09:23.827Z",
+      "input": 17576,
+      "output": 182,
+      "total": 19294
+    },
+    {
+      "timestamp": "2026-03-04T02:09:32.945Z",
+      "input": 19261,
+      "output": 382,
+      "total": 19643
+    },
+    {
+      "timestamp": "2026-03-04T02:10:20.850Z",
+      "input": 21370,
+      "output": 262,
+      "total": 21632
+    },
+    {
+      "timestamp": "2026-03-04T02:10:24.001Z",
+      "input": 9857,
+      "output": 39,
+      "total": 21672
+    },
+    {
+      "timestamp": "2026-03-04T02:11:25.325Z",
+      "input": 21981,
+      "output": 829,
+      "total": 22810
+    },
+    {
+      "timestamp": "2026-03-04T02:11:30.247Z",
+      "input": 25517,
+      "output": 314,
+      "total": 25831
+    },
+    {
+      "timestamp": "2026-03-04T02:11:36.447Z",
+      "input": 71636,
+      "output": 229,
+      "total": 71865
+    },
+    {
+      "timestamp": "2026-03-04T02:11:43.472Z",
+      "input": 71987,
+      "output": 296,
+      "total": 72283
+    },
+    {
+      "timestamp": "2026-03-04T02:11:54.216Z",
+      "input": 70653,
+      "output": 747,
+      "total": 72936
+    },
+    {
+      "timestamp": "2026-03-04T02:12:11.443Z",
+      "input": 37757,
+      "output": 1131,
+      "total": 53736
+    },
+    {
+      "timestamp": "2026-03-04T02:12:18.826Z",
+      "input": 51529,
+      "output": 444,
+      "total": 53509
+    },
+    {
+      "timestamp": "2026-03-04T02:12:41.170Z",
+      "input": 53430,
+      "output": 1423,
+      "total": 56389
+    },
+    {
+      "timestamp": "2026-03-04T02:12:48.828Z",
+      "input": 55213,
+      "output": 235,
+      "total": 55448
+    },
+    {
+      "timestamp": "2026-03-04T02:12:51.879Z",
+      "input": 664,
+      "output": 104,
+      "total": 55552
+    },
+    {
+      "timestamp": "2026-03-04T02:12:58.830Z",
+      "input": 54202,
+      "output": 324,
+      "total": 56062
+    },
+    {
+      "timestamp": "2026-03-04T02:13:03.422Z",
+      "input": 55850,
+      "output": 132,
+      "total": 55982
+    },
+    {
+      "timestamp": "2026-03-04T02:13:10.845Z",
+      "input": 56110,
+      "output": 110,
+      "total": 56220
+    },
+    {
+      "timestamp": "2026-03-04T03:06:12.328Z",
+      "input": 55019,
+      "output": 356,
+      "total": 56911
+    },
+    {
+      "timestamp": "2026-03-04T03:06:19.614Z",
+      "input": 55260,
+      "output": 297,
+      "total": 57093
+    },
+    {
+      "timestamp": "2026-03-04T03:08:04.732Z",
+      "input": 55648,
+      "output": 1923,
+      "total": 59107
+    },
+    {
+      "timestamp": "2026-03-04T03:08:36.971Z",
+      "input": 479,
+      "output": 2374,
+      "total": 59941
+    },
+    {
+      "timestamp": "2026-03-04T03:08:44.045Z",
+      "input": 56916,
+      "output": 214,
+      "total": 58666
+    },
+    {
+      "timestamp": "2026-03-04T03:08:50.632Z",
+      "input": 57109,
+      "output": 270,
+      "total": 58915
+    },
+    {
+      "timestamp": "2026-03-04T03:09:00.712Z",
+      "input": 57371,
+      "output": 188,
+      "total": 59095
     },
     {
       "timestamp": "2026-03-04T07:51:59.100Z",
       "input": 0,
       "output": 0,
       "total": 0
-    },
-    {
-      "timestamp": "2026-03-04T08:03:44.192Z",
-      "input": 10370,
-      "output": 71,
-      "total": 15049
     },
     {
       "timestamp": "2026-03-04T08:03:49.127Z",
@@ -306,6 +594,2082 @@
       "input": 49872,
       "output": 149,
       "total": 51557
+    },
+    {
+      "timestamp": "2026-03-04T09:13:03.089Z",
+      "input": 30487,
+      "output": 284,
+      "total": 52019
+    },
+    {
+      "timestamp": "2026-03-04T09:13:14.034Z",
+      "input": 49533,
+      "output": 756,
+      "total": 52849
+    },
+    {
+      "timestamp": "2026-03-04T09:13:22.765Z",
+      "input": 47666,
+      "output": 21,
+      "total": 52295
+    },
+    {
+      "timestamp": "2026-03-04T09:13:36.316Z",
+      "input": 50800,
+      "output": 29,
+      "total": 52365
+    },
+    {
+      "timestamp": "2026-03-04T09:13:53.211Z",
+      "input": 291,
+      "output": 1732,
+      "total": 54247
+    },
+    {
+      "timestamp": "2026-03-04T09:14:00.030Z",
+      "input": 48193,
+      "output": 295,
+      "total": 53096
+    },
+    {
+      "timestamp": "2026-03-04T09:14:05.672Z",
+      "input": 47572,
+      "output": 110,
+      "total": 53058
+    },
+    {
+      "timestamp": "2026-03-04T09:14:13.233Z",
+      "input": 48598,
+      "output": 443,
+      "total": 53649
+    },
+    {
+      "timestamp": "2026-03-04T09:14:20.149Z",
+      "input": 51111,
+      "output": 256,
+      "total": 53927
+    },
+    {
+      "timestamp": "2026-03-04T09:14:40.401Z",
+      "input": 49315,
+      "output": 679,
+      "total": 54602
+    },
+    {
+      "timestamp": "2026-03-04T09:19:36.704Z",
+      "input": 53319,
+      "output": 957,
+      "total": 55812
+    },
+    {
+      "timestamp": "2026-03-04T09:19:52.192Z",
+      "input": 56233,
+      "output": 1198,
+      "total": 59991
+    },
+    {
+      "timestamp": "2026-03-04T09:19:59.268Z",
+      "input": 53954,
+      "output": 299,
+      "total": 59629
+    },
+    {
+      "timestamp": "2026-03-04T09:20:08.976Z",
+      "input": 58070,
+      "output": 410,
+      "total": 60016
+    },
+    {
+      "timestamp": "2026-03-04T09:20:14.118Z",
+      "input": 48275,
+      "output": 138,
+      "total": 60189
+    },
+    {
+      "timestamp": "2026-03-04T09:21:11.100Z",
+      "input": 55616,
+      "output": 3477,
+      "total": 63701
+    },
+    {
+      "timestamp": "2026-03-04T09:21:15.359Z",
+      "input": 61134,
+      "output": 59,
+      "total": 63753
+    },
+    {
+      "timestamp": "2026-03-04T09:21:22.452Z",
+      "input": 51988,
+      "output": 400,
+      "total": 64164
+    },
+    {
+      "timestamp": "2026-03-04T09:21:27.959Z",
+      "input": 64060,
+      "output": 73,
+      "total": 64133
+    },
+    {
+      "timestamp": "2026-03-04T09:21:43.739Z",
+      "input": 52387,
+      "output": 342,
+      "total": 64505
+    },
+    {
+      "timestamp": "2026-03-04T09:30:15.729Z",
+      "input": 59243,
+      "output": 945,
+      "total": 65564
+    },
+    {
+      "timestamp": "2026-03-04T09:30:31.917Z",
+      "input": 21960,
+      "output": 1343,
+      "total": 66823
+    },
+    {
+      "timestamp": "2026-03-04T09:30:37.250Z",
+      "input": 63506,
+      "output": 159,
+      "total": 66225
+    },
+    {
+      "timestamp": "2026-03-04T09:30:40.953Z",
+      "input": 66260,
+      "output": 37,
+      "total": 66297
+    },
+    {
+      "timestamp": "2026-03-04T09:30:47.181Z",
+      "input": 63270,
+      "output": 319,
+      "total": 68197
+    },
+    {
+      "timestamp": "2026-03-04T09:31:09.468Z",
+      "input": 37596,
+      "output": 2035,
+      "total": 72911
+    },
+    {
+      "timestamp": "2026-03-04T09:31:16.826Z",
+      "input": 22624,
+      "output": 321,
+      "total": 71585
+    },
+    {
+      "timestamp": "2026-03-04T09:31:28.273Z",
+      "input": 70084,
+      "output": 957,
+      "total": 72577
+    },
+    {
+      "timestamp": "2026-03-04T09:32:49.810Z",
+      "input": 70274,
+      "output": 5965,
+      "total": 77775
+    },
+    {
+      "timestamp": "2026-03-04T09:33:02.443Z",
+      "input": 74972,
+      "output": 824,
+      "total": 77332
+    },
+    {
+      "timestamp": "2026-03-04T09:33:06.992Z",
+      "input": 71647,
+      "output": 113,
+      "total": 77136
+    },
+    {
+      "timestamp": "2026-03-04T09:33:11.071Z",
+      "input": 23336,
+      "output": 82,
+      "total": 77178
+    },
+    {
+      "timestamp": "2026-03-04T09:33:16.625Z",
+      "input": 12183,
+      "output": 225,
+      "total": 77432
+    },
+    {
+      "timestamp": "2026-03-04T09:33:24.091Z",
+      "input": 72866,
+      "output": 72,
+      "total": 77546
+    },
+    {
+      "timestamp": "2026-03-04T09:33:31.224Z",
+      "input": 76196,
+      "output": 255,
+      "total": 77987
+    },
+    {
+      "timestamp": "2026-03-04T10:25:59.279Z",
+      "input": 76668,
+      "output": 159,
+      "total": 78363
+    },
+    {
+      "timestamp": "2026-03-04T10:28:33.661Z",
+      "input": 75951,
+      "output": 1299,
+      "total": 79810
+    },
+    {
+      "timestamp": "2026-03-04T10:28:41.897Z",
+      "input": 74557,
+      "output": 224,
+      "total": 79389
+    },
+    {
+      "timestamp": "2026-03-04T10:28:50.877Z",
+      "input": 76864,
+      "output": 373,
+      "total": 79797
+    },
+    {
+      "timestamp": "2026-03-04T10:29:00.561Z",
+      "input": 77272,
+      "output": 202,
+      "total": 80034
+    },
+    {
+      "timestamp": "2026-03-04T10:29:08.399Z",
+      "input": 78607,
+      "output": 178,
+      "total": 80321
+    },
+    {
+      "timestamp": "2026-03-04T10:50:08.767Z",
+      "input": 8117,
+      "output": 414,
+      "total": 20307
+    },
+    {
+      "timestamp": "2026-03-04T10:50:14.138Z",
+      "input": 15038,
+      "output": 331,
+      "total": 20745
+    },
+    {
+      "timestamp": "2026-03-04T10:50:20.935Z",
+      "input": 8919,
+      "output": 540,
+      "total": 21235
+    },
+    {
+      "timestamp": "2026-03-04T10:50:31.750Z",
+      "input": 15561,
+      "output": 906,
+      "total": 21843
+    },
+    {
+      "timestamp": "2026-03-04T11:07:46.138Z",
+      "input": 78287,
+      "output": 177,
+      "total": 81024
+    },
+    {
+      "timestamp": "2026-03-04T11:07:52.809Z",
+      "input": 78388,
+      "output": 49,
+      "total": 80997
+    },
+    {
+      "timestamp": "2026-03-04T11:08:03.733Z",
+      "input": 150,
+      "output": 513,
+      "total": 81559
+    },
+    {
+      "timestamp": "2026-03-04T11:08:27.649Z",
+      "input": 82159,
+      "output": 1525,
+      "total": 85220
+    },
+    {
+      "timestamp": "2026-03-04T11:08:38.070Z",
+      "input": 1363,
+      "output": 469,
+      "total": 85288
+    },
+    {
+      "timestamp": "2026-03-04T11:08:53.199Z",
+      "input": 79947,
+      "output": 758,
+      "total": 86081
+    },
+    {
+      "timestamp": "2026-03-04T11:09:05.885Z",
+      "input": 83556,
+      "output": 691,
+      "total": 86807
+    },
+    {
+      "timestamp": "2026-03-04T11:09:10.684Z",
+      "input": 81065,
+      "output": 88,
+      "total": 86529
+    },
+    {
+      "timestamp": "2026-03-04T11:09:19.754Z",
+      "input": 71387,
+      "output": 389,
+      "total": 86624
+    },
+    {
+      "timestamp": "2026-03-04T11:09:27.384Z",
+      "input": 83432,
+      "output": 199,
+      "total": 86191
+    },
+    {
+      "timestamp": "2026-03-04T11:09:48.397Z",
+      "input": 84690,
+      "output": 1193,
+      "total": 87419
+    },
+    {
+      "timestamp": "2026-03-04T11:09:54.029Z",
+      "input": 80352,
+      "output": 213,
+      "total": 85941
+    },
+    {
+      "timestamp": "2026-03-04T11:10:02.519Z",
+      "input": 81120,
+      "output": 192,
+      "total": 85920
+    },
+    {
+      "timestamp": "2026-03-04T11:10:11.414Z",
+      "input": 81027,
+      "output": 252,
+      "total": 85887
+    },
+    {
+      "timestamp": "2026-03-04T11:12:43.020Z",
+      "input": 87911,
+      "output": 867,
+      "total": 90314
+    },
+    {
+      "timestamp": "2026-03-04T11:12:52.080Z",
+      "input": 87060,
+      "output": 627,
+      "total": 90247
+    },
+    {
+      "timestamp": "2026-03-04T11:13:14.537Z",
+      "input": 86906,
+      "output": 1908,
+      "total": 91374
+    },
+    {
+      "timestamp": "2026-03-04T11:13:40.234Z",
+      "input": 84774,
+      "output": 1486,
+      "total": 90868
+    },
+    {
+      "timestamp": "2026-03-04T11:13:47.938Z",
+      "input": 86499,
+      "output": 262,
+      "total": 89321
+    },
+    {
+      "timestamp": "2026-03-04T11:13:55.592Z",
+      "input": 84186,
+      "output": 291,
+      "total": 89085
+    },
+    {
+      "timestamp": "2026-03-04T11:14:22.773Z",
+      "input": 83403,
+      "output": 1537,
+      "total": 89548
+    },
+    {
+      "timestamp": "2026-03-04T11:14:27.491Z",
+      "input": 76395,
+      "output": 82,
+      "total": 81085
+    },
+    {
+      "timestamp": "2026-03-04T11:14:33.765Z",
+      "input": 66266,
+      "output": 161,
+      "total": 81275
+    },
+    {
+      "timestamp": "2026-03-04T11:14:42.763Z",
+      "input": 76775,
+      "output": 278,
+      "total": 81661
+    },
+    {
+      "timestamp": "2026-03-04T11:21:23.689Z",
+      "input": 87964,
+      "output": 2335,
+      "total": 94907
+    },
+    {
+      "timestamp": "2026-03-04T11:21:30.221Z",
+      "input": 87133,
+      "output": 221,
+      "total": 92730
+    },
+    {
+      "timestamp": "2026-03-04T11:21:44.785Z",
+      "input": 89173,
+      "output": 733,
+      "total": 92466
+    },
+    {
+      "timestamp": "2026-03-04T11:21:59.890Z",
+      "input": 87893,
+      "output": 805,
+      "total": 93306
+    },
+    {
+      "timestamp": "2026-03-04T11:22:07.313Z",
+      "input": 3609,
+      "output": 253,
+      "total": 85014
+    },
+    {
+      "timestamp": "2026-03-04T11:22:12.492Z",
+      "input": 82489,
+      "output": 58,
+      "total": 85107
+    },
+    {
+      "timestamp": "2026-03-04T11:22:23.857Z",
+      "input": 79825,
+      "output": 290,
+      "total": 85491
+    },
+    {
+      "timestamp": "2026-03-04T11:22:30.304Z",
+      "input": 82752,
+      "output": 219,
+      "total": 85531
+    },
+    {
+      "timestamp": "2026-03-04T11:22:38.886Z",
+      "input": 80264,
+      "output": 189,
+      "total": 85829
+    },
+    {
+      "timestamp": "2026-03-04T11:26:54.024Z",
+      "input": 616,
+      "output": 1453,
+      "total": 87829
+    },
+    {
+      "timestamp": "2026-03-04T11:26:58.468Z",
+      "input": 81923,
+      "output": 87,
+      "total": 87386
+    },
+    {
+      "timestamp": "2026-03-04T11:27:05.003Z",
+      "input": 87107,
+      "output": 220,
+      "total": 88863
+    },
+    {
+      "timestamp": "2026-03-04T11:27:21.807Z",
+      "input": 87362,
+      "output": 845,
+      "total": 89743
+    },
+    {
+      "timestamp": "2026-03-04T11:27:30.601Z",
+      "input": 85170,
+      "output": 246,
+      "total": 90024
+    },
+    {
+      "timestamp": "2026-03-04T11:27:35.435Z",
+      "input": 65995,
+      "output": 163,
+      "total": 90222
+    },
+    {
+      "timestamp": "2026-03-04T11:27:47.757Z",
+      "input": 92290,
+      "output": 1042,
+      "total": 95892
+    },
+    {
+      "timestamp": "2026-03-04T11:27:55.763Z",
+      "input": 88353,
+      "output": 309,
+      "total": 93270
+    },
+    {
+      "timestamp": "2026-03-04T11:28:01.977Z",
+      "input": 121,
+      "output": 162,
+      "total": 93467
+    },
+    {
+      "timestamp": "2026-03-04T11:28:28.659Z",
+      "input": 91966,
+      "output": 1562,
+      "total": 95064
+    },
+    {
+      "timestamp": "2026-03-04T11:28:38.701Z",
+      "input": 88132,
+      "output": 455,
+      "total": 91147
+    },
+    {
+      "timestamp": "2026-03-04T11:28:47.854Z",
+      "input": 88424,
+      "output": 220,
+      "total": 91204
+    },
+    {
+      "timestamp": "2026-03-04T11:28:56.124Z",
+      "input": 85863,
+      "output": 251,
+      "total": 91490
+    },
+    {
+      "timestamp": "2026-03-04T11:29:11.540Z",
+      "input": 69509,
+      "output": 82,
+      "total": 91607
+    },
+    {
+      "timestamp": "2026-03-04T11:29:17.619Z",
+      "input": 87028,
+      "output": 82,
+      "total": 91718
+    },
+    {
+      "timestamp": "2026-03-04T11:29:24.802Z",
+      "input": 87098,
+      "output": 203,
+      "total": 91909
+    },
+    {
+      "timestamp": "2026-03-04T11:29:33.720Z",
+      "input": 89468,
+      "output": 244,
+      "total": 92272
+    },
+    {
+      "timestamp": "2026-03-04T11:34:01.227Z",
+      "input": 91737,
+      "output": 1422,
+      "total": 98535
+    },
+    {
+      "timestamp": "2026-03-04T11:34:07.070Z",
+      "input": 96396,
+      "output": 138,
+      "total": 98070
+    },
+    {
+      "timestamp": "2026-03-04T11:34:13.938Z",
+      "input": 96569,
+      "output": 136,
+      "total": 98241
+    },
+    {
+      "timestamp": "2026-03-04T11:34:21.744Z",
+      "input": 74174,
+      "output": 162,
+      "total": 98400
+    },
+    {
+      "timestamp": "2026-03-04T11:34:30.325Z",
+      "input": 95537,
+      "output": 321,
+      "total": 98418
+    },
+    {
+      "timestamp": "2026-03-04T11:34:37.007Z",
+      "input": 91702,
+      "output": 159,
+      "total": 94421
+    },
+    {
+      "timestamp": "2026-03-04T11:34:43.880Z",
+      "input": 70392,
+      "output": 247,
+      "total": 94703
+    },
+    {
+      "timestamp": "2026-03-04T11:34:56.634Z",
+      "input": 92263,
+      "output": 204,
+      "total": 95027
+    },
+    {
+      "timestamp": "2026-03-04T11:36:58.799Z",
+      "input": 96873,
+      "output": 1092,
+      "total": 100525
+    },
+    {
+      "timestamp": "2026-03-04T11:37:14.552Z",
+      "input": 90857,
+      "output": 669,
+      "total": 96902
+    },
+    {
+      "timestamp": "2026-03-04T11:37:22.574Z",
+      "input": 91561,
+      "output": 268,
+      "total": 97205
+    },
+    {
+      "timestamp": "2026-03-04T11:37:32.350Z",
+      "input": 82392,
+      "output": 203,
+      "total": 97443
+    },
+    {
+      "timestamp": "2026-03-04T11:37:39.640Z",
+      "input": 95000,
+      "output": 146,
+      "total": 97706
+    },
+    {
+      "timestamp": "2026-03-04T11:42:30.019Z",
+      "input": 93377,
+      "output": 2881,
+      "total": 100866
+    },
+    {
+      "timestamp": "2026-03-04T11:42:39.692Z",
+      "input": 93849,
+      "output": 248,
+      "total": 98705
+    },
+    {
+      "timestamp": "2026-03-04T11:42:49.182Z",
+      "input": 4404,
+      "output": 360,
+      "total": 99100
+    },
+    {
+      "timestamp": "2026-03-04T11:42:54.305Z",
+      "input": 94527,
+      "output": 109,
+      "total": 99244
+    },
+    {
+      "timestamp": "2026-03-04T11:43:04.611Z",
+      "input": 7759,
+      "output": 466,
+      "total": 99745
+    },
+    {
+      "timestamp": "2026-03-04T11:43:09.734Z",
+      "input": 9156,
+      "output": 167,
+      "total": 99947
+    },
+    {
+      "timestamp": "2026-03-04T11:43:19.765Z",
+      "input": 97422,
+      "output": 455,
+      "total": 100437
+    },
+    {
+      "timestamp": "2026-03-04T11:43:25.078Z",
+      "input": 98323,
+      "output": 122,
+      "total": 99981
+    },
+    {
+      "timestamp": "2026-03-04T11:43:40.054Z",
+      "input": 98480,
+      "output": 924,
+      "total": 100940
+    },
+    {
+      "timestamp": "2026-03-04T11:43:50.559Z",
+      "input": 98320,
+      "output": 401,
+      "total": 100257
+    },
+    {
+      "timestamp": "2026-03-04T11:44:01.583Z",
+      "input": 97090,
+      "output": 507,
+      "total": 100157
+    },
+    {
+      "timestamp": "2026-03-04T11:44:07.965Z",
+      "input": 74432,
+      "output": 173,
+      "total": 99693
+    },
+    {
+      "timestamp": "2026-03-04T11:44:16.349Z",
+      "input": 95877,
+      "output": 226,
+      "total": 98663
+    },
+    {
+      "timestamp": "2026-03-04T11:44:25.081Z",
+      "input": 93343,
+      "output": 247,
+      "total": 98966
+    },
+    {
+      "timestamp": "2026-03-04T13:01:17.276Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-04T13:33:26.656Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-05T00:05:30.377Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-05T04:16:29.362Z",
+      "input": 9597,
+      "output": 255,
+      "total": 15228
+    },
+    {
+      "timestamp": "2026-03-05T04:16:37.509Z",
+      "input": 19808,
+      "output": 857,
+      "total": 20665
+    },
+    {
+      "timestamp": "2026-03-05T04:16:44.460Z",
+      "input": 19041,
+      "output": 670,
+      "total": 22271
+    },
+    {
+      "timestamp": "2026-03-05T04:16:59.859Z",
+      "input": 21637,
+      "output": 1812,
+      "total": 26009
+    },
+    {
+      "timestamp": "2026-03-05T04:17:05.934Z",
+      "input": 23181,
+      "output": 509,
+      "total": 25226
+    },
+    {
+      "timestamp": "2026-03-05T04:17:20.768Z",
+      "input": 20798,
+      "output": 619,
+      "total": 26025
+    },
+    {
+      "timestamp": "2026-03-05T04:17:31.319Z",
+      "input": 20102,
+      "output": 919,
+      "total": 26397
+    },
+    {
+      "timestamp": "2026-03-05T04:17:41.718Z",
+      "input": 24403,
+      "output": 198,
+      "total": 26137
+    },
+    {
+      "timestamp": "2026-03-05T04:17:45.910Z",
+      "input": 20802,
+      "output": 128,
+      "total": 26306
+    },
+    {
+      "timestamp": "2026-03-05T04:18:16.739Z",
+      "input": 14207,
+      "output": 261,
+      "total": 16004
+    },
+    {
+      "timestamp": "2026-03-05T04:18:20.721Z",
+      "input": 11199,
+      "output": 241,
+      "total": 16048
+    },
+    {
+      "timestamp": "2026-03-05T04:18:26.908Z",
+      "input": 18432,
+      "output": 417,
+      "total": 20385
+    },
+    {
+      "timestamp": "2026-03-05T04:18:33.441Z",
+      "input": 58217,
+      "output": 294,
+      "total": 63887
+    },
+    {
+      "timestamp": "2026-03-05T04:18:39.670Z",
+      "input": 64294,
+      "output": 334,
+      "total": 67188
+    },
+    {
+      "timestamp": "2026-03-05T04:18:44.401Z",
+      "input": 66294,
+      "output": 122,
+      "total": 68976
+    },
+    {
+      "timestamp": "2026-03-05T04:18:49.513Z",
+      "input": 50436,
+      "output": 263,
+      "total": 66315
+    },
+    {
+      "timestamp": "2026-03-05T04:18:57.823Z",
+      "input": 61031,
+      "output": 654,
+      "total": 67061
+    },
+    {
+      "timestamp": "2026-03-05T04:19:07.452Z",
+      "input": 63973,
+      "output": 891,
+      "total": 67424
+    },
+    {
+      "timestamp": "2026-03-05T04:19:14.813Z",
+      "input": 62086,
+      "output": 523,
+      "total": 67985
+    },
+    {
+      "timestamp": "2026-03-05T04:19:18.445Z",
+      "input": 55866,
+      "output": 41,
+      "total": 67683
+    },
+    {
+      "timestamp": "2026-03-05T04:19:29.187Z",
+      "input": 66754,
+      "output": 933,
+      "total": 69223
+    },
+    {
+      "timestamp": "2026-03-05T04:19:45.005Z",
+      "input": 66885,
+      "output": 1610,
+      "total": 70031
+    },
+    {
+      "timestamp": "2026-03-05T04:20:05.907Z",
+      "input": 66104,
+      "output": 2291,
+      "total": 70955
+    },
+    {
+      "timestamp": "2026-03-05T04:20:23.327Z",
+      "input": 1909,
+      "output": 1982,
+      "total": 70963
+    },
+    {
+      "timestamp": "2026-03-05T04:20:40.188Z",
+      "input": 67637,
+      "output": 1409,
+      "total": 71606
+    },
+    {
+      "timestamp": "2026-03-05T04:20:44.945Z",
+      "input": 4589,
+      "output": 178,
+      "total": 70815
+    },
+    {
+      "timestamp": "2026-03-05T04:20:51.618Z",
+      "input": 68224,
+      "output": 382,
+      "total": 71166
+    },
+    {
+      "timestamp": "2026-03-05T04:20:54.838Z",
+      "input": 5896,
+      "output": 48,
+      "total": 70968
+    },
+    {
+      "timestamp": "2026-03-05T04:20:59.657Z",
+      "input": 68426,
+      "output": 82,
+      "total": 71068
+    },
+    {
+      "timestamp": "2026-03-05T04:21:07.041Z",
+      "input": 65781,
+      "output": 420,
+      "total": 71577
+    },
+    {
+      "timestamp": "2026-03-05T04:21:13.888Z",
+      "input": 68912,
+      "output": 362,
+      "total": 71834
+    },
+    {
+      "timestamp": "2026-03-05T04:21:18.672Z",
+      "input": 716,
+      "output": 66,
+      "total": 71694
+    },
+    {
+      "timestamp": "2026-03-05T04:21:22.144Z",
+      "input": 26028,
+      "output": 95,
+      "total": 28683
+    },
+    {
+      "timestamp": "2026-03-05T04:21:25.369Z",
+      "input": 23265,
+      "output": 87,
+      "total": 28728
+    },
+    {
+      "timestamp": "2026-03-05T04:21:31.186Z",
+      "input": 24113,
+      "output": 160,
+      "total": 28881
+    },
+    {
+      "timestamp": "2026-03-05T04:21:43.828Z",
+      "input": 12987,
+      "output": 30,
+      "total": 28889
+    },
+    {
+      "timestamp": "2026-03-05T04:21:57.923Z",
+      "input": 27405,
+      "output": 960,
+      "total": 29901
+    },
+    {
+      "timestamp": "2026-03-05T04:22:01.918Z",
+      "input": 24409,
+      "output": 196,
+      "total": 29213
+    },
+    {
+      "timestamp": "2026-03-05T04:22:12.335Z",
+      "input": 26722,
+      "output": 878,
+      "total": 30160
+    },
+    {
+      "timestamp": "2026-03-05T04:22:18.139Z",
+      "input": 13480,
+      "output": 355,
+      "total": 29707
+    },
+    {
+      "timestamp": "2026-03-05T04:22:27.552Z",
+      "input": 26944,
+      "output": 520,
+      "total": 30024
+    },
+    {
+      "timestamp": "2026-03-05T04:28:36.030Z",
+      "input": 65349,
+      "output": 252,
+      "total": 77377
+    },
+    {
+      "timestamp": "2026-03-05T04:28:41.224Z",
+      "input": 65758,
+      "output": 179,
+      "total": 77713
+    },
+    {
+      "timestamp": "2026-03-05T04:28:46.753Z",
+      "input": 65881,
+      "output": 157,
+      "total": 77814
+    },
+    {
+      "timestamp": "2026-03-05T04:28:54.048Z",
+      "input": 62299,
+      "output": 459,
+      "total": 74534
+    },
+    {
+      "timestamp": "2026-03-05T04:28:59.411Z",
+      "input": 71636,
+      "output": 87,
+      "total": 74283
+    },
+    {
+      "timestamp": "2026-03-05T04:29:05.604Z",
+      "input": 68939,
+      "output": 89,
+      "total": 74404
+    },
+    {
+      "timestamp": "2026-03-05T04:29:10.145Z",
+      "input": 71876,
+      "output": 85,
+      "total": 74521
+    },
+    {
+      "timestamp": "2026-03-05T04:29:15.668Z",
+      "input": 62817,
+      "output": 185,
+      "total": 74778
+    },
+    {
+      "timestamp": "2026-03-05T04:29:19.614Z",
+      "input": 72217,
+      "output": 62,
+      "total": 74839
+    },
+    {
+      "timestamp": "2026-03-05T04:29:26.152Z",
+      "input": 69712,
+      "output": 85,
+      "total": 75173
+    },
+    {
+      "timestamp": "2026-03-05T04:29:32.566Z",
+      "input": 73709,
+      "output": 257,
+      "total": 75502
+    },
+    {
+      "timestamp": "2026-03-05T04:29:37.483Z",
+      "input": 69985,
+      "output": 98,
+      "total": 75459
+    },
+    {
+      "timestamp": "2026-03-05T04:29:46.011Z",
+      "input": 63838,
+      "output": 593,
+      "total": 76207
+    },
+    {
+      "timestamp": "2026-03-05T04:30:00.599Z",
+      "input": 71191,
+      "output": 29,
+      "total": 75828
+    },
+    {
+      "timestamp": "2026-03-05T04:30:06.811Z",
+      "input": 872,
+      "output": 122,
+      "total": 76002
+    },
+    {
+      "timestamp": "2026-03-05T04:30:11.565Z",
+      "input": 73390,
+      "output": 148,
+      "total": 76098
+    },
+    {
+      "timestamp": "2026-03-05T04:30:23.335Z",
+      "input": 74684,
+      "output": 573,
+      "total": 76793
+    },
+    {
+      "timestamp": "2026-03-05T04:32:49.324Z",
+      "input": 72731,
+      "output": 217,
+      "total": 77556
+    },
+    {
+      "timestamp": "2026-03-05T04:32:54.526Z",
+      "input": 65729,
+      "output": 120,
+      "total": 77625
+    },
+    {
+      "timestamp": "2026-03-05T04:33:00.030Z",
+      "input": 76644,
+      "output": 247,
+      "total": 79451
+    },
+    {
+      "timestamp": "2026-03-05T04:33:09.041Z",
+      "input": 34350,
+      "output": 814,
+      "total": 36700
+    },
+    {
+      "timestamp": "2026-03-05T04:33:14.634Z",
+      "input": 21279,
+      "output": 355,
+      "total": 36482
+    },
+    {
+      "timestamp": "2026-03-05T04:33:37.314Z",
+      "input": 31034,
+      "output": 2214,
+      "total": 38624
+    },
+    {
+      "timestamp": "2026-03-05T04:33:42.015Z",
+      "input": 35211,
+      "output": 151,
+      "total": 36898
+    },
+    {
+      "timestamp": "2026-03-05T04:33:50.323Z",
+      "input": 34746,
+      "output": 449,
+      "total": 37755
+    },
+    {
+      "timestamp": "2026-03-05T04:33:54.846Z",
+      "input": 32280,
+      "output": 119,
+      "total": 37775
+    },
+    {
+      "timestamp": "2026-03-05T04:34:00.368Z",
+      "input": 33637,
+      "output": 76,
+      "total": 38321
+    },
+    {
+      "timestamp": "2026-03-05T04:34:09.339Z",
+      "input": 36036,
+      "output": 502,
+      "total": 39098
+    },
+    {
+      "timestamp": "2026-03-05T04:34:14.933Z",
+      "input": 27121,
+      "output": 224,
+      "total": 39121
+    },
+    {
+      "timestamp": "2026-03-05T04:34:17.794Z",
+      "input": 2780,
+      "output": 50,
+      "total": 39182
+    },
+    {
+      "timestamp": "2026-03-05T04:34:21.315Z",
+      "input": 27447,
+      "output": 91,
+      "total": 39314
+    },
+    {
+      "timestamp": "2026-03-05T04:34:27.686Z",
+      "input": 4391,
+      "output": 277,
+      "total": 39996
+    },
+    {
+      "timestamp": "2026-03-05T04:34:32.437Z",
+      "input": 866,
+      "output": 42,
+      "total": 39948
+    },
+    {
+      "timestamp": "2026-03-05T04:34:38.039Z",
+      "input": 37515,
+      "output": 183,
+      "total": 40258
+    },
+    {
+      "timestamp": "2026-03-05T04:34:44.915Z",
+      "input": 37636,
+      "output": 287,
+      "total": 40483
+    },
+    {
+      "timestamp": "2026-03-05T04:37:06.234Z",
+      "input": 29131,
+      "output": 970,
+      "total": 41877
+    },
+    {
+      "timestamp": "2026-03-05T04:37:23.677Z",
+      "input": 40000,
+      "output": 1860,
+      "total": 43396
+    },
+    {
+      "timestamp": "2026-03-05T04:37:28.097Z",
+      "input": 2074,
+      "output": 234,
+      "total": 43140
+    },
+    {
+      "timestamp": "2026-03-05T04:37:33.381Z",
+      "input": 38999,
+      "output": 198,
+      "total": 43805
+    },
+    {
+      "timestamp": "2026-03-05T04:37:53.765Z",
+      "input": 38968,
+      "output": 1986,
+      "total": 46330
+    },
+    {
+      "timestamp": "2026-03-05T04:37:58.793Z",
+      "input": 42309,
+      "output": 163,
+      "total": 45032
+    },
+    {
+      "timestamp": "2026-03-05T04:38:04.363Z",
+      "input": 1532,
+      "output": 297,
+      "total": 45349
+    },
+    {
+      "timestamp": "2026-03-05T04:38:09.672Z",
+      "input": 42571,
+      "output": 251,
+      "total": 45382
+    },
+    {
+      "timestamp": "2026-03-05T04:38:15.308Z",
+      "input": 42643,
+      "output": 355,
+      "total": 45558
+    },
+    {
+      "timestamp": "2026-03-05T04:38:21.844Z",
+      "input": 42841,
+      "output": 256,
+      "total": 45657
+    },
+    {
+      "timestamp": "2026-03-05T04:38:30.722Z",
+      "input": 40868,
+      "output": 640,
+      "total": 46116
+    },
+    {
+      "timestamp": "2026-03-05T04:38:38.696Z",
+      "input": 40985,
+      "output": 482,
+      "total": 46075
+    },
+    {
+      "timestamp": "2026-03-05T04:38:44.893Z",
+      "input": 41214,
+      "output": 58,
+      "total": 45880
+    },
+    {
+      "timestamp": "2026-03-05T04:38:49.819Z",
+      "input": 1468,
+      "output": 308,
+      "total": 46320
+    },
+    {
+      "timestamp": "2026-03-05T04:38:57.029Z",
+      "input": 42215,
+      "output": 502,
+      "total": 47325
+    },
+    {
+      "timestamp": "2026-03-05T04:39:14.441Z",
+      "input": 45412,
+      "output": 1995,
+      "total": 48943
+    },
+    {
+      "timestamp": "2026-03-05T04:39:27.982Z",
+      "input": 35378,
+      "output": 1401,
+      "total": 48555
+    },
+    {
+      "timestamp": "2026-03-05T04:39:41.241Z",
+      "input": 42298,
+      "output": 1134,
+      "total": 48808
+    },
+    {
+      "timestamp": "2026-03-05T04:39:52.838Z",
+      "input": 42565,
+      "output": 1155,
+      "total": 49096
+    },
+    {
+      "timestamp": "2026-03-05T04:39:58.637Z",
+      "input": 45443,
+      "output": 284,
+      "total": 48287
+    },
+    {
+      "timestamp": "2026-03-05T04:40:14.828Z",
+      "input": 45489,
+      "output": 1549,
+      "total": 49598
+    },
+    {
+      "timestamp": "2026-03-05T04:40:39.641Z",
+      "input": 36458,
+      "output": 2643,
+      "total": 50877
+    },
+    {
+      "timestamp": "2026-03-05T04:40:53.444Z",
+      "input": 42950,
+      "output": 1309,
+      "total": 49635
+    },
+    {
+      "timestamp": "2026-03-05T04:40:59.547Z",
+      "input": 43431,
+      "output": 351,
+      "total": 49158
+    },
+    {
+      "timestamp": "2026-03-05T04:41:15.841Z",
+      "input": 43527,
+      "output": 1728,
+      "total": 50631
+    },
+    {
+      "timestamp": "2026-03-05T04:41:19.042Z",
+      "input": 4448,
+      "output": 46,
+      "total": 49038
+    },
+    {
+      "timestamp": "2026-03-05T04:41:23.626Z",
+      "input": 37431,
+      "output": 82,
+      "total": 49289
+    },
+    {
+      "timestamp": "2026-03-05T04:41:30.228Z",
+      "input": 7841,
+      "output": 125,
+      "total": 49438
+    },
+    {
+      "timestamp": "2026-03-05T04:41:33.942Z",
+      "input": 44853,
+      "output": 43,
+      "total": 49504
+    },
+    {
+      "timestamp": "2026-03-05T04:41:38.442Z",
+      "input": 7405,
+      "output": 224,
+      "total": 50125
+    },
+    {
+      "timestamp": "2026-03-05T04:41:43.144Z",
+      "input": 48451,
+      "output": 42,
+      "total": 50029
+    },
+    {
+      "timestamp": "2026-03-05T04:41:47.836Z",
+      "input": 44888,
+      "output": 51,
+      "total": 50315
+    },
+    {
+      "timestamp": "2026-03-05T04:41:54.942Z",
+      "input": 38572,
+      "output": 526,
+      "total": 50874
+    },
+    {
+      "timestamp": "2026-03-05T04:42:22.949Z",
+      "input": 46941,
+      "output": 3481,
+      "total": 54006
+    },
+    {
+      "timestamp": "2026-03-05T04:42:33.643Z",
+      "input": 49057,
+      "output": 1024,
+      "total": 51617
+    },
+    {
+      "timestamp": "2026-03-05T04:42:39.840Z",
+      "input": 48096,
+      "output": 48,
+      "total": 50704
+    },
+    {
+      "timestamp": "2026-03-05T04:42:59.540Z",
+      "input": 3106,
+      "output": 1751,
+      "total": 52473
+    },
+    {
+      "timestamp": "2026-03-05T04:43:15.431Z",
+      "input": 39000,
+      "output": 860,
+      "total": 51636
+    },
+    {
+      "timestamp": "2026-03-05T04:43:24.837Z",
+      "input": 5800,
+      "output": 942,
+      "total": 52438
+    },
+    {
+      "timestamp": "2026-03-05T04:43:33.944Z",
+      "input": 46641,
+      "output": 778,
+      "total": 52795
+    },
+    {
+      "timestamp": "2026-03-05T04:43:50.342Z",
+      "input": 1919,
+      "output": 1516,
+      "total": 53611
+    },
+    {
+      "timestamp": "2026-03-05T04:44:01.242Z",
+      "input": 8166,
+      "output": 984,
+      "total": 53694
+    },
+    {
+      "timestamp": "2026-03-05T04:44:10.657Z",
+      "input": 6335,
+      "output": 919,
+      "total": 54870
+    },
+    {
+      "timestamp": "2026-03-05T04:44:15.118Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-05T04:44:21.552Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-05T04:44:30.825Z",
+      "input": 51885,
+      "output": 65,
+      "total": 54510
+    },
+    {
+      "timestamp": "2026-03-05T04:44:43.672Z",
+      "input": 6926,
+      "output": 1405,
+      "total": 55947
+    },
+    {
+      "timestamp": "2026-03-05T04:44:57.680Z",
+      "input": 49554,
+      "output": 1248,
+      "total": 56178
+    },
+    {
+      "timestamp": "2026-03-05T04:53:45.748Z",
+      "input": 50023,
+      "output": 490,
+      "total": 55889
+    },
+    {
+      "timestamp": "2026-03-05T04:54:02.803Z",
+      "input": 50133,
+      "output": 30,
+      "total": 55539
+    },
+    {
+      "timestamp": "2026-03-05T04:54:09.424Z",
+      "input": 53035,
+      "output": 344,
+      "total": 55939
+    },
+    {
+      "timestamp": "2026-03-05T04:54:15.438Z",
+      "input": 53305,
+      "output": 70,
+      "total": 55935
+    },
+    {
+      "timestamp": "2026-03-05T04:55:06.128Z",
+      "input": 53542,
+      "output": 390,
+      "total": 56492
+    },
+    {
+      "timestamp": "2026-03-05T04:55:16.218Z",
+      "input": 44591,
+      "output": 509,
+      "total": 56876
+    },
+    {
+      "timestamp": "2026-03-05T13:00:09.516Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-05T13:34:06.779Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-06T13:01:29.820Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-07T07:26:08.189Z",
+      "input": 12459,
+      "output": 312,
+      "total": 15331
+    },
+    {
+      "timestamp": "2026-03-07T07:26:12.157Z",
+      "input": 4025,
+      "output": 200,
+      "total": 19073
+    },
+    {
+      "timestamp": "2026-03-07T07:26:20.891Z",
+      "input": 13754,
+      "output": 317,
+      "total": 19447
+    },
+    {
+      "timestamp": "2026-03-07T07:29:02.873Z",
+      "input": 10592,
+      "output": 261,
+      "total": 15461
+    },
+    {
+      "timestamp": "2026-03-07T07:29:10.507Z",
+      "input": 13033,
+      "output": 280,
+      "total": 17921
+    },
+    {
+      "timestamp": "2026-03-07T07:29:19.561Z",
+      "input": 56645,
+      "output": 174,
+      "total": 61427
+    },
+    {
+      "timestamp": "2026-03-07T07:29:28.711Z",
+      "input": 63072,
+      "output": 264,
+      "total": 63336
+    },
+    {
+      "timestamp": "2026-03-07T07:29:36.450Z",
+      "input": 61444,
+      "output": 316,
+      "total": 66368
+    },
+    {
+      "timestamp": "2026-03-07T07:29:43.242Z",
+      "input": 20313,
+      "output": 356,
+      "total": 33469
+    },
+    {
+      "timestamp": "2026-03-07T07:29:49.890Z",
+      "input": 31669,
+      "output": 393,
+      "total": 35646
+    },
+    {
+      "timestamp": "2026-03-07T07:29:58.270Z",
+      "input": 33068,
+      "output": 521,
+      "total": 36149
+    },
+    {
+      "timestamp": "2026-03-07T07:30:05.051Z",
+      "input": 37164,
+      "output": 268,
+      "total": 42040
+    },
+    {
+      "timestamp": "2026-03-07T07:30:16.610Z",
+      "input": 42584,
+      "output": 626,
+      "total": 43210
+    },
+    {
+      "timestamp": "2026-03-07T07:30:31.088Z",
+      "input": 43107,
+      "output": 713,
+      "total": 45356
+    },
+    {
+      "timestamp": "2026-03-07T07:30:38.156Z",
+      "input": 42671,
+      "output": 237,
+      "total": 45468
+    },
+    {
+      "timestamp": "2026-03-07T07:30:49.021Z",
+      "input": 42930,
+      "output": 454,
+      "total": 45944
+    },
+    {
+      "timestamp": "2026-03-07T07:30:52.572Z",
+      "input": 44451,
+      "output": 45,
+      "total": 46032
+    },
+    {
+      "timestamp": "2026-03-07T07:30:57.540Z",
+      "input": 45582,
+      "output": 146,
+      "total": 47264
+    },
+    {
+      "timestamp": "2026-03-07T07:31:07.405Z",
+      "input": 46226,
+      "output": 236,
+      "total": 47998
+    },
+    {
+      "timestamp": "2026-03-07T07:31:16.029Z",
+      "input": 46413,
+      "output": 329,
+      "total": 48278
+    },
+    {
+      "timestamp": "2026-03-07T07:31:27.596Z",
+      "input": 46773,
+      "output": 434,
+      "total": 48743
+    },
+    {
+      "timestamp": "2026-03-07T07:31:35.071Z",
+      "input": 46226,
+      "output": 207,
+      "total": 48993
+    },
+    {
+      "timestamp": "2026-03-07T07:31:39.812Z",
+      "input": 46242,
+      "output": 95,
+      "total": 50945
+    },
+    {
+      "timestamp": "2026-03-07T07:31:45.023Z",
+      "input": 46671,
+      "output": 64,
+      "total": 51343
+    },
+    {
+      "timestamp": "2026-03-07T07:31:54.077Z",
+      "input": 49820,
+      "output": 486,
+      "total": 51842
+    },
+    {
+      "timestamp": "2026-03-07T07:32:03.171Z",
+      "input": 50115,
+      "output": 193,
+      "total": 51844
+    },
+    {
+      "timestamp": "2026-03-07T07:32:07.853Z",
+      "input": 51744,
+      "output": 146,
+      "total": 51890
+    },
+    {
+      "timestamp": "2026-03-07T07:32:14.671Z",
+      "input": 1313,
+      "output": 350,
+      "total": 52351
+    },
+    {
+      "timestamp": "2026-03-07T07:32:27.480Z",
+      "input": 47546,
+      "output": 631,
+      "total": 52785
+    },
+    {
+      "timestamp": "2026-03-07T07:43:36.746Z",
+      "input": 6889,
+      "output": 585,
+      "total": 20274
+    },
+    {
+      "timestamp": "2026-03-07T07:43:43.922Z",
+      "input": 15231,
+      "output": 420,
+      "total": 20259
+    },
+    {
+      "timestamp": "2026-03-07T07:43:54.408Z",
+      "input": 7294,
+      "output": 586,
+      "total": 20680
+    },
+    {
+      "timestamp": "2026-03-07T07:45:58.634Z",
+      "input": 7850,
+      "output": 578,
+      "total": 21228
+    },
+    {
+      "timestamp": "2026-03-07T07:46:06.471Z",
+      "input": 20850,
+      "output": 448,
+      "total": 21298
+    },
+    {
+      "timestamp": "2026-03-07T07:46:09.874Z",
+      "input": 1656,
+      "output": 81,
+      "total": 21065
+    },
+    {
+      "timestamp": "2026-03-07T07:46:19.291Z",
+      "input": 16535,
+      "output": 358,
+      "total": 21501
+    },
+    {
+      "timestamp": "2026-03-07T07:46:24.134Z",
+      "input": 8426,
+      "output": 81,
+      "total": 21307
+    },
+    {
+      "timestamp": "2026-03-07T07:46:27.539Z",
+      "input": 16039,
+      "output": 36,
+      "total": 21451
+    },
+    {
+      "timestamp": "2026-03-07T07:46:34.429Z",
+      "input": 8687,
+      "output": 302,
+      "total": 21789
+    },
+    {
+      "timestamp": "2026-03-07T07:46:40.148Z",
+      "input": 10230,
+      "output": 143,
+      "total": 23173
+    },
+    {
+      "timestamp": "2026-03-07T07:46:52.354Z",
+      "input": 18939,
+      "output": 600,
+      "total": 24147
+    },
+    {
+      "timestamp": "2026-03-07T07:46:59.265Z",
+      "input": 23773,
+      "output": 163,
+      "total": 23936
+    },
+    {
+      "timestamp": "2026-03-07T07:47:10.551Z",
+      "input": 11584,
+      "output": 250,
+      "total": 24634
+    },
+    {
+      "timestamp": "2026-03-07T07:47:18.607Z",
+      "input": 11847,
+      "output": 250,
+      "total": 24897
+    },
+    {
+      "timestamp": "2026-03-07T07:47:30.575Z",
+      "input": 22551,
+      "output": 767,
+      "total": 27926
+    },
+    {
+      "timestamp": "2026-03-07T07:47:41.776Z",
+      "input": 14785,
+      "output": 715,
+      "total": 28300
+    },
+    {
+      "timestamp": "2026-03-07T07:47:55.062Z",
+      "input": 25383,
+      "output": 879,
+      "total": 28822
+    },
+    {
+      "timestamp": "2026-03-07T07:48:07.770Z",
+      "input": 28093,
+      "output": 670,
+      "total": 28763
+    },
+    {
+      "timestamp": "2026-03-07T07:48:24.860Z",
+      "input": 23995,
+      "output": 1081,
+      "total": 29684
+    },
+    {
+      "timestamp": "2026-03-07T07:48:36.860Z",
+      "input": 26197,
+      "output": 682,
+      "total": 29439
+    },
+    {
+      "timestamp": "2026-03-07T07:48:53.990Z",
+      "input": 24490,
+      "output": 1258,
+      "total": 30356
+    },
+    {
+      "timestamp": "2026-03-07T07:49:03.340Z",
+      "input": 29536,
+      "output": 344,
+      "total": 31416
+    },
+    {
+      "timestamp": "2026-03-07T07:49:17.274Z",
+      "input": 10746,
+      "output": 895,
+      "total": 32633
+    },
+    {
+      "timestamp": "2026-03-07T07:49:24.250Z",
+      "input": 30349,
+      "output": 30,
+      "total": 31915
+    },
+    {
+      "timestamp": "2026-03-07T07:51:23.003Z",
+      "input": 30741,
+      "output": 6228,
+      "total": 38505
+    },
+    {
+      "timestamp": "2026-03-07T07:51:45.702Z",
+      "input": 36235,
+      "output": 1272,
+      "total": 39043
+    },
+    {
+      "timestamp": "2026-03-07T07:51:50.943Z",
+      "input": 36162,
+      "output": 85,
+      "total": 38807
+    },
+    {
+      "timestamp": "2026-03-07T07:51:56.069Z",
+      "input": 34418,
+      "output": 130,
+      "total": 39156
+    },
+    {
+      "timestamp": "2026-03-07T07:51:57.573Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-07T07:51:57.587Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-07T07:52:00.539Z",
+      "input": 37824,
+      "output": 6,
+      "total": 39366
+    },
+    {
+      "timestamp": "2026-03-07T09:09:25.931Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-07T09:09:34.432Z",
+      "input": 51176,
+      "output": 234,
+      "total": 52946
+    },
+    {
+      "timestamp": "2026-03-07T09:09:37.698Z",
+      "input": 52063,
+      "output": 14,
+      "total": 53613
+    },
+    {
+      "timestamp": "2026-03-07T09:09:43.129Z",
+      "input": 52325,
+      "output": 118,
+      "total": 53979
+    },
+    {
+      "timestamp": "2026-03-07T10:07:31.026Z",
+      "input": 54354,
+      "output": 98,
+      "total": 54452
+    },
+    {
+      "timestamp": "2026-03-07T12:27:53.397Z",
+      "input": 35084,
+      "output": 812,
+      "total": 40504
+    },
+    {
+      "timestamp": "2026-03-07T12:27:58.957Z",
+      "input": 36405,
+      "output": 123,
+      "total": 40112
+    },
+    {
+      "timestamp": "2026-03-07T12:28:09.138Z",
+      "input": 50045,
+      "output": 48,
+      "total": 54701
+    },
+    {
+      "timestamp": "2026-03-07T12:28:09.269Z",
+      "input": 36565,
+      "output": 481,
+      "total": 40630
+    },
+    {
+      "timestamp": "2026-03-07T12:28:13.298Z",
+      "input": 53350,
+      "output": 73,
+      "total": 54959
+    },
+    {
+      "timestamp": "2026-03-07T12:28:13.593Z",
+      "input": 37917,
+      "output": 32,
+      "total": 40509
+    },
+    {
+      "timestamp": "2026-03-07T12:28:22.315Z",
+      "input": 388,
+      "output": 353,
+      "total": 41061
+    },
+    {
+      "timestamp": "2026-03-07T12:29:26.044Z",
+      "input": 40437,
+      "output": 3388,
+      "total": 45361
+    },
+    {
+      "timestamp": "2026-03-07T12:29:47.772Z",
+      "input": 40527,
+      "output": 1052,
+      "total": 46187
+    },
+    {
+      "timestamp": "2026-03-07T12:29:53.440Z",
+      "input": 44655,
+      "output": 85,
+      "total": 46276
+    },
+    {
+      "timestamp": "2026-03-07T12:30:00.578Z",
+      "input": 44943,
+      "output": 128,
+      "total": 46607
+    },
+    {
+      "timestamp": "2026-03-07T12:30:02.077Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-07T12:30:02.089Z",
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    {
+      "timestamp": "2026-03-07T12:30:06.859Z",
+      "input": 44244,
+      "output": 6,
+      "total": 46810
+    },
+    {
+      "timestamp": "2026-03-07T12:35:26.824Z",
+      "input": 52688,
+      "output": 104,
+      "total": 55352
+    },
+    {
+      "timestamp": "2026-03-07T12:35:31.228Z",
+      "input": 52943,
+      "output": 65,
+      "total": 55568
+    },
+    {
+      "timestamp": "2026-03-07T12:36:27.470Z",
+      "input": 53308,
+      "output": 432,
+      "total": 56300
+    },
+    {
+      "timestamp": "2026-03-07T12:36:42.053Z",
+      "input": 59775,
+      "output": 662,
+      "total": 62997
+    },
+    {
+      "timestamp": "2026-03-07T12:36:59.227Z",
+      "input": 61837,
+      "output": 909,
+      "total": 64282
+    },
+    {
+      "timestamp": "2026-03-07T12:37:07.130Z",
+      "input": 64051,
+      "output": 255,
+      "total": 64306
+    },
+    {
+      "timestamp": "2026-03-07T12:37:13.797Z",
+      "input": 62719,
+      "output": 112,
+      "total": 64367
+    },
+    {
+      "timestamp": "2026-03-07T12:37:21.400Z",
+      "input": 60819,
+      "output": 255,
+      "total": 64658
     }
   ]
 }
