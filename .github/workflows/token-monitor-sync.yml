@@ -1,0 +1,46 @@
+name: Token Monitor Sync
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: token-monitor-sync
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    # GitHub-hosted runners cannot read ~/.openclaw on your machine.
+    # Run this workflow on a self-hosted runner deployed on the OpenClaw host.
+    runs-on: self-hosted
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Sync token usage data
+        run: python scripts_sync_token_data.py
+
+      - name: Commit updated token data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add token-monitor/data/token-usage.json
+          if git diff --cached --quiet; then
+            echo "No token data changes"
+            exit 0
+          fi
+          git commit -m "chore: sync token monitor data"
+          git push

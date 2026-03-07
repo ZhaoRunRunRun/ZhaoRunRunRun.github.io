@@ -3,8 +3,8 @@ import json
 import os
 from datetime import datetime, timezone
 
-LOG_PATH = os.path.expanduser('~/.openclaw/logs/token-usage.log')
-STATE_DIR = os.path.expanduser('~/.openclaw')
+STATE_DIR = os.path.expanduser(os.getenv('OPENCLAW_STATE_DIR', '~/.openclaw'))
+LOG_PATH = os.path.join(STATE_DIR, 'logs', 'token-usage.log')
 OUT_PATH = os.path.join(os.path.dirname(__file__), 'token-monitor', 'data', 'token-usage.json')
 
 
@@ -134,6 +134,7 @@ def main():
         json.dump(payload, f, ensure_ascii=False, indent=2)
 
     non_zero = sum(1 for r in records if r['input'] or r['output'])
+    print(f'STATE_DIR={STATE_DIR}')
     print(f'Wrote {len(records)} records ({non_zero} non-zero) -> {OUT_PATH}')
 
 

@@ -366,7 +366,7 @@ function renderLineChart(records) {
   const innerW = w - pad.left - pad.right;
   const innerH = h - pad.top - pad.bottom;
 
-  drawGrid(ctx, w, h, pad.left, innerH);
+  drawGrid(ctx, w, h, pad, innerH);
   drawAxisLabels(ctx, dpr, w, h, pad, maxRaw, records[0].timestamp, records[records.length - 1].timestamp);
 
   const pointsInput = [];
